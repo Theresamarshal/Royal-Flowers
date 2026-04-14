@@ -7,12 +7,9 @@ const cloudinary = require("cloudinary").v2;
 
 const Product = require("../models/product");
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// Configure Cloudinary using single CLOUDINARY_URL env variable
+// Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+cloudinary.config(process.env.CLOUDINARY_URL);
 
 // STORAGE CONFIG
 const storage = new CloudinaryStorage({
@@ -63,7 +60,8 @@ try{
     await product.save();
     res.json(product);
 }catch(err){
-    res.status(500).json(err);
+    console.error("DEBUG UPLOAD ERROR:", err);
+    res.status(500).json({ error: err.message ? err.message : JSON.stringify(err) });
 }
 });
 
