@@ -298,10 +298,15 @@ formData.append("description",document.getElementById("description").value);
 formData.append("productDetails",document.getElementById("productDetails").value);
 formData.append("image",document.getElementById("image").files[0]);
 
-await fetch("/api/products",{
+const res = await fetch("/api/products",{
 method:"POST",
 body:formData
 });
+if (!res.ok) {
+    alert("Failed to add product! Make sure your MongoDB and Cloudinary variables are correct on Render.");
+    console.error(await res.text());
+    return;
+}
 
 alert("Product Added 🌸");
 
