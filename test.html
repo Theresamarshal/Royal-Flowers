@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+</head>
+<body>
+    <h1>Product Test</h1>
+    <div id="testDiv">Loading...</div>
+    
+    <script>
+        async function testAPI() {
+            console.log("Testing API...");
+            try {
+                const response = await fetch("http://localhost:5000/api/products");
+                const products = await response.json();
+                console.log("Products:", products);
+                document.getElementById("testDiv").innerHTML = "Products: " + products.length;
+            } catch(error) {
+                console.error("Error:", error);
+                document.getElementById("testDiv").innerHTML = "Error: " + error.message;
+            }
+        }
+        
+        testAPI();
+        setInterval(testAPI, 3000);
+    </script>
+</body>
+</html>

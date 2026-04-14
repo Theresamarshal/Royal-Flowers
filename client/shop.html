@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Blooms - Premium Flower Shop in Kochi</title>
+    <link rel="stylesheet" href="styles.css?v=3.1">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <i class="fas fa-truck"></i>
+                <span>Free Delivery On Orders Over ₹2999</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+                    <button type="submit" id="searchBtn"><i class="fas fa-search"></i></button>
+                    <div class="advanced-search-panel" id="advancedSearch">
+                        <div class="search-filters">
+                            <div class="filter-group">
+                                <label>Price Range</label>
+                                <div class="price-range">
+                                    <input type="number" placeholder="Min" id="minPrice">
+                                    <span>-</span>
+                                    <input type="number" placeholder="Max" id="maxPrice">
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Category</label>
+                                <select id="categoryFilter">
+                                    <option value="">All Categories</option>
+                                    <option value="bouquet">Bouquet</option>
+                                    <option value="bridal">Bridal Bouquet</option>
+                                    <option value="cake">Cake</option>
+                                    <option value="congratulations">Congratulations</option>
+                                    <option value="funeral">Funeral/Sympathy</option>
+                                    <option value="valentine">Valentine's Day flowers</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="welcome">Welcome Flower</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Color</label>
+                                <div class="color-filters">
+                                    <label class="color-option"><input type="checkbox" value="red"> <span class="color-dot red"></span></label>
+                                    <label class="color-option"><input type="checkbox" value="pink"> <span class="color-dot pink"></span></label>
+                                    <label class="color-option"><input type="checkbox" value="white"> <span class="color-dot white"></span></label>
+                                    <label class="color-option"><input type="checkbox" value="yellow"> <span class="color-dot yellow"></span></label>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Rating</label>
+                                <select id="ratingFilter">
+                                    <option value="">All Ratings</option>
+                                    <option value="4">4+ Stars</option>
+                                    <option value="3">3+ Stars</option>
+                                    <option value="2">2+ Stars</option>
+                                </select>
+                            </div>
+                            <button type="button" class="apply-filters-btn">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo -->
+                <div class="logo">
+                    <i class="fas fa-spa"></i>
+                    <span>Royal Flowers</span>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/people/The-blooms/61577712767391/" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/thebloomskochi" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@Thebloomss" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="cart-user">
+                        <a href="admin.html" class="admin-icon" title="Admin Panel" style="opacity: 0.6; font-size: 1rem;">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        <a href="#" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        <a href="#" class="user-icon">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="shop.html" class="nav-link">Shop <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="anniversary.html">Anniversary Flowers</a></li>
+                        <li><a href="birthday.html">Birthday Flowers</a></li>
+                        <li><a href="bouquet.html">Bouquet</a></li>
+                        <li><a href="bridal.html">Bridal Bouquet</a></li>
+                        <li><a href="cake.html">Cake</a></li>
+                        <li><a href="congratulations.html">Congratulations</a></li>
+                        <li><a href="funeral.html">Funeral/Sympathy</a></li>
+                        <li><a href="valentine.html">Valentine's Day flowers</a></li>
+                        <li><a href="wedding.html">Wedding</a></li>
+                        <li><a href="welcome.html">Welcome Flower</a></li>
+                    </ul>
+                </li>
+                <li><a href="/who-we-are" class="nav-link">Who We Are</a></li>
+                <li><a href="/contact" class="nav-link">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Shop Section -->
+    <section id="shop" class="shop-section">
+        <div class="hero-section" style="background-image: url('images/banner.png'); margin-bottom: 30px;">
+            <div class="hero-overlay"></div>
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Find Your <span class="hero-title-highlight">Perfect</span> Bouquet</h1>
+                    <p class="hero-subtitle" style="font-size: 1.3rem;">Explore our curated collection of fresh, handcrafted floral masterpieces for every special moment.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="shop-header">
+                <h1>Shop</h1>
+                <p>This is where you can browse products in this store.</p>
+            </div>
+                        <div class="shop-content">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="widget">
+            <h3>Shop by Categories</h3>
+            <ul class="categories">
+               <li><a href="anniversary.html">Anniversary Flowers</a></li>
+                            <li><a href="birthday.html">Birthday Flowers</a></li>
+                            <li><a href="bouquet.html">Bouquet</a></li>
+                            <li><a href="bridal.html">Bridal Bouquet</a></li>
+                            <li><a href="cake.html">Cake</a></li>
+                            <li><a href="congratulations.html">Congratulations</a></li>
+                            <li><a href="funeral.html">Funeral/Sympathy</a></li>
+                            <li><a href="valentine.html">Valentine's Day flowers</a></li>
+                            <li><a href="wedding.html">Wedding</a></li>
+                            <li><a href="welcome.html">Welcome Flower</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Products -->
+    <div class="main-content">
+
+        <div class="products-header">
+            <span class="results-count">
+                Showing <span id="productCount">0</span> products
+            </span>
+
+            <div class="sort-dropdown">
+                <select id="sortSelect" onchange="sortProducts()">
+                    <option value="default">Sort by</option>
+                    <option value="price-low">Price Low to High</option>
+                    <option value="price-high">Price High to Low</option>
+                    <option value="name-asc">Name A-Z</option>
+                    <option value="name-desc">Name Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- IMPORTANT -->
+        <div id="productGrid" class="product-grid"></div>
+
+    </div>
+
+</div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed Products -->
+   <section class="recently-viewed">
+    <div class="container">
+
+        <h2>Recently Viewed Products</h2>
+
+        <!-- JS will insert products here -->
+        <div class="recent-products-grid"></div>
+
+    </div>
+</section>
+
+    <!-- User Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login / Register</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="login-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                    <div class="social-login">
+                        <p>Or login with:</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="register-form" id="registerForm" style="display: none;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="register-btn">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content quick-view-content">
+            <div class="modal-header">
+                <h2>Quick View</h2>
+                <button class="close-modal" id="closeQuickView">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="quick-view-grid">
+                    <div class="quick-view-images">
+                        <img src="https://picsum.photos/seed/quickview/400/400" alt="Product" id="quickViewImage">
+                    </div>
+                    <div class="quick-view-info">
+                        <h3 id="quickViewTitle">Product Name</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(24 reviews)</span>
+                        </div>
+                        <p class="price" id="quickViewPrice">$45.99</p>
+                        <p class="description">Beautiful arrangement perfect for any occasion. Fresh flowers hand-picked and arranged by our expert florists.</p>
+                        <div class="quick-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal -->
+    <div class="modal" id="zoomModal">
+        <div class="modal-content zoom-content">
+            <button class="close-modal" id="closeZoom">&times;</button>
+            <img src="" alt="Zoomed Product" id="zoomedImage">
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="flower-loader">
+                <i class="fas fa-spa"></i>
+            </div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h2 class="footer-logo" style="color: white; font-family: 'Playfair Display', serif; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 1.8rem;"><i class="fas fa-spa"></i> Royal Flowers</h2>
+                    <p>Handcrafted floral elegance delivered across Kochi.</p>
+                    <div class="socials">
+                        <p>Follow Us On</p>
+                        <a href="https://www.facebook.com/people/The-blooms/61577712767391/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/thebloomskochi" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Thebloomss" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blogs">Blogs</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#sitemap">Sitemap</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section serving">
+                    <h3>Serving</h3>
+                    <ul>
+                        <li>Ernakulam</li>
+                        <li>Fort Kochi</li>
+                        <li>Kakkanad</li>
+                        <li>& more</li>
+                    </ul>
+                </div>
+                <div class="footer-section payment">
+                    <h3>Payment Methods:</h3>
+                    <div class="payment-methods-list" style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                        <div class="payment-item" style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: white;">
+                            <i class="fas fa-qrcode fa-lg" style="width: 30px;"></i>
+                            <span>UPI</span>
+                        </div>
+                        <div class="payment-item" style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: white;">
+                            <i class="fas fa-shield-alt fa-lg" style="width: 30px;"></i>
+                            <span>Razorpay</span>
+                        </div>
+                        <div class="payment-item" style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: white;">
+                            <div style="width: 30px; display: flex; gap: 2px;">
+                                <i class="fab fa-cc-visa fa-lg"></i>
+                            </div>
+                            <span>Cards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;2025 Royal Flowers Kochi. Website Developed by Ectesso</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919747577095" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">Send Your Order<br>Via WhatsApp</span>
+    </a>
+
+    <script src="script.js?v=3.4"></script>
+</body>
+</html>
