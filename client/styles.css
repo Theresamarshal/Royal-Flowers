@@ -4721,3 +4721,72 @@ gap:30px;
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .search-bar {
+        max-width: 100%;
+        width: 100%;
+    }
+    .nav-menu {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        padding: 10px 0;
+    }
+    .nav-link {
+        padding: 5px 0;
+    }
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    .hero-subtitle {
+        font-size: 1rem !important;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .hero-buttons a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .products, .recent-products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+        gap: 10px !important;
+    }
+    .product-card {
+        padding: 10px;
+    }
+    .product-image img, .product-card img, .recent-product-card img {
+        height: 120px !important;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-section.payment .payment-methods-list {
+        align-items: center;
+    }
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px 15px 8px 10px;
+    }
+    .whatsapp-float i {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    .whatsapp-float .whatsapp-text {
+        font-size: 0.75rem;
+    }
+}
