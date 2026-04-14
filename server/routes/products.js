@@ -7,9 +7,8 @@ const cloudinary = require("cloudinary").v2;
 
 const Product = require("../models/product");
 
-// Configure Cloudinary using single CLOUDINARY_URL env variable
-// Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
-cloudinary.config(process.env.CLOUDINARY_URL);
+// Cloudinary automatically reads CLOUDINARY_URL from environment variables
+// No explicit config() call needed
 
 // STORAGE CONFIG
 const storage = new CloudinaryStorage({
