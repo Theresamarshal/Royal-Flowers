@@ -87,7 +87,15 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/flowersho
 
 .then(()=>console.log("MongoDB Connected"))
 
-.catch(err=>console.log(err));
+.catch(err=>console.error("MongoDB Connection Error:", err));
+
+
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error("Express Global Error:", err);
+    res.status(500).json({ error: err.message || "Internal Server Error" });
+});
 
 
 

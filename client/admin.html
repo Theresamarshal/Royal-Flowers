@@ -303,8 +303,8 @@ method:"POST",
 body:formData
 });
 if (!res.ok) {
-    alert("Failed to add product! Make sure your MongoDB and Cloudinary variables are correct on Render.");
-    console.error(await res.text());
+    const errorData = await res.json().catch(() => ({ error: "Unknown Network Error" }));
+    alert("Failed to add product! Server says: " + errorData.error);
     return;
 }
 
