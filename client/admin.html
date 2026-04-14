@@ -17,7 +17,26 @@ padding:30px;
 h1{
 color:#d63384;
 text-align:center;
+position: relative;
 }
+
+.logout-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #d63384;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.logout-btn:hover { background: #c2185b; }
 
 .container{
 max-width:1100px;
@@ -160,7 +179,7 @@ color:black;
 
 <div class="container">
 
-<h1>🌸 Royal Flowers Admin</h1>
+<h1>🌸 Royal Flowers Admin <a href="/admin-logout" class="logout-btn">🚪 Logout</a></h1>
 
 <!-- ADD PRODUCT -->
 
