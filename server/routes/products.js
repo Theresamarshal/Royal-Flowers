@@ -49,10 +49,14 @@ try{
         productCode = await generateProductCode();
     }
 
+    // Normalize category to always be an array
+    const categoryRaw = req.body.category;
+    const categoryArr = Array.isArray(categoryRaw) ? categoryRaw : (categoryRaw ? [categoryRaw] : []);
+
     const product = new Product({
         name:req.body.name,
-        category:req.body.category,
-        price:req.body.priceMedium || req.body.price, // Fallback
+        category: categoryArr,
+        price:req.body.priceMedium || req.body.price,
         priceSmall:req.body.priceSmall,
         priceMedium:req.body.priceMedium,
         priceLarge:req.body.priceLarge,
@@ -84,9 +88,13 @@ res.json({message:"deleted"});
 // UPDATE PRODUCT
 router.put("/:id", upload.single("image"), async(req,res)=>{
 try{
+    // Normalize category to always be an array
+    const categoryRaw = req.body.category;
+    const categoryArr = Array.isArray(categoryRaw) ? categoryRaw : (categoryRaw ? [categoryRaw] : []);
+
     const updateData = {
         name:req.body.name,
-        category:req.body.category,
+        category: categoryArr,
         price:req.body.priceMedium || req.body.price,
         priceSmall:req.body.priceSmall,
         priceMedium:req.body.priceMedium,

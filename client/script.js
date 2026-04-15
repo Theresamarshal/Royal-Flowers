@@ -90,6 +90,14 @@ function displayProducts(products) {
             <div class="product-info">
                 <h3>${product.name}</h3>
 
+                <div class="product-categories" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">
+                    ${(Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []))
+                        .map(cat => `<span style="background:#fff0f5;border:1px solid #f7aac9;color:#d63384;border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;">${cat}</span>`)
+                        .join('')}
+                </div>
+
+                ${product.description ? `<p class="product-description" style="font-size:13px;color:#666;margin:0 0 8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${product.description}</p>` : ''}
+
                 <div class="price-whatsapp">
                     <span class="price">₹${product.priceMedium || product.price || 'N/A'}</span>
 
@@ -231,18 +239,17 @@ window.searchProducts = function() {
     const searchTerm = document.querySelector('.search-bar input').value.toLowerCase();
     
     if (searchTerm.trim() === '') {
-        // Empty search, show all products
         currentProducts = [...originalProducts];
         displayProducts(currentProducts);
     } else {
-        // Active search
         isSearching = true;
-        const filteredProducts = originalProducts.filter(product => 
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.description.toLowerCase().includes(searchTerm)
-        );
-        
-        currentProducts = filteredProducts; // Update current products for sorting
+        const filteredProducts = originalProducts.filter(product => {
+            const cats = Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []);
+            return product.name.toLowerCase().includes(searchTerm) ||
+                   (product.description && product.description.toLowerCase().includes(searchTerm)) ||
+                   cats.some(c => c.toLowerCase().includes(searchTerm));
+        });
+        currentProducts = filteredProducts;
         displayProducts(filteredProducts);
     }
 }

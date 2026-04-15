@@ -138,6 +138,40 @@ margin-right:5px;
 background:#218838;
 }
 
+/* Category Checkboxes */
+.category-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    max-height: 160px;
+    overflow-y: auto;
+}
+.category-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    background: #fff0f5;
+    border: 1px solid #f7aac9;
+    border-radius: 20px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.category-checkboxes label:hover { background: #ffd6e8; }
+.category-checkboxes input[type=checkbox]:checked + span {
+    color: #d63384;
+    font-weight: bold;
+}
+.category-checkboxes label:has(input:checked) {
+    background: #ffd6e8;
+    border-color: #d63384;
+}
+
 /* Modal Styles */
 .modal{
 display:none;
@@ -198,19 +232,19 @@ color:black;
 </div>
 
 <div class="form-group">
-<select id="category" required>
-    <option value="">Select Category</option>
-    <option value="Anniversary Flowers">Anniversary Flowers</option>
-    <option value="Birthday Flowers">Birthday Flowers</option>
-    <option value="Bouquet">Bouquet</option>
-    <option value="Bridal Bouquet">Bridal Bouquet</option>
-    <option value="Cake">Cake</option>
-    <option value="Congratulations">Congratulations</option>
-    <option value="Funeral/Sympathy">Funeral/Sympathy</option>
-    <option value="Valentine's Day flowers">Valentine's Day flowers</option>
-    <option value="Wedding">Wedding</option>
-    <option value="Welcome Flower">Welcome Flower</option>
-</select>
+    <label style="font-size:13px;color:#666;margin-bottom:5px;display:block;">Categories (select one or more)</label>
+    <div class="category-checkboxes" id="categoryCheckboxes">
+        <label><input type="checkbox" value="Anniversary Flowers"><span>Anniversary Flowers</span></label>
+        <label><input type="checkbox" value="Birthday Flowers"><span>Birthday Flowers</span></label>
+        <label><input type="checkbox" value="Bouquet"><span>Bouquet</span></label>
+        <label><input type="checkbox" value="Bridal Bouquet"><span>Bridal Bouquet</span></label>
+        <label><input type="checkbox" value="Cake"><span>Cake</span></label>
+        <label><input type="checkbox" value="Congratulations"><span>Congratulations</span></label>
+        <label><input type="checkbox" value="Funeral/Sympathy"><span>Funeral/Sympathy</span></label>
+        <label><input type="checkbox" value="Valentine's Day flowers"><span>Valentine's Day flowers</span></label>
+        <label><input type="checkbox" value="Wedding"><span>Wedding</span></label>
+        <label><input type="checkbox" value="Welcome Flower"><span>Welcome Flower</span></label>
+    </div>
 </div>
 
 <div class="form-group" style="display: flex; gap: 10px;">
@@ -259,19 +293,19 @@ color:black;
                 <input type="text" id="editName" placeholder="Product Name" required>
             </div>
             <div class="form-group">
-                <select id="editCategory" required>
-                    <option value="">Select Category</option>
-                    <option value="Anniversary Flowers">Anniversary Flowers</option>
-                    <option value="Birthday Flowers">Birthday Flowers</option>
-                    <option value="Bouquet">Bouquet</option>
-                    <option value="Bridal Bouquet">Bridal Bouquet</option>
-                    <option value="Cake">Cake</option>
-                    <option value="Congratulations">Congratulations</option>
-                    <option value="Funeral/Sympathy">Funeral/Sympathy</option>
-                    <option value="Valentine's Day flowers">Valentine's Day flowers</option>
-                    <option value="Wedding">Wedding</option>
-                    <option value="Welcome Flower">Welcome Flower</option>
-                </select>
+                <label style="font-size:13px;color:#666;margin-bottom:5px;display:block;">Categories (select one or more)</label>
+                <div class="category-checkboxes" id="editCategoryCheckboxes">
+                    <label><input type="checkbox" value="Anniversary Flowers"><span>Anniversary Flowers</span></label>
+                    <label><input type="checkbox" value="Birthday Flowers"><span>Birthday Flowers</span></label>
+                    <label><input type="checkbox" value="Bouquet"><span>Bouquet</span></label>
+                    <label><input type="checkbox" value="Bridal Bouquet"><span>Bridal Bouquet</span></label>
+                    <label><input type="checkbox" value="Cake"><span>Cake</span></label>
+                    <label><input type="checkbox" value="Congratulations"><span>Congratulations</span></label>
+                    <label><input type="checkbox" value="Funeral/Sympathy"><span>Funeral/Sympathy</span></label>
+                    <label><input type="checkbox" value="Valentine's Day flowers"><span>Valentine's Day flowers</span></label>
+                    <label><input type="checkbox" value="Wedding"><span>Wedding</span></label>
+                    <label><input type="checkbox" value="Welcome Flower"><span>Welcome Flower</span></label>
+                </div>
             </div>
             <div class="form-group" style="display: flex; gap: 10px;">
                 <div style="flex: 1;"><label style="font-size: 11px; color: #666;">Small</label><input type="number" id="editPriceSmall" placeholder="S" required></div>
@@ -309,7 +343,10 @@ const formData = new FormData();
 
 formData.append("productCode",document.getElementById("productCode").value);
 formData.append("name",document.getElementById("name").value);
-formData.append("category",document.getElementById("category").value);
+// Collect all checked categories
+document.querySelectorAll('#categoryCheckboxes input[type=checkbox]:checked').forEach(cb => {
+    formData.append("category", cb.value);
+});
 formData.append("priceSmall",document.getElementById("priceSmall").value);
 formData.append("priceMedium",document.getElementById("priceMedium").value);
 formData.append("priceLarge",document.getElementById("priceLarge").value);
@@ -422,7 +459,11 @@ if(product){
 document.getElementById("editId").value = product._id;
 document.getElementById("editProductCode").value = product.productCode || "";
 document.getElementById("editName").value = product.name;
-document.getElementById("editCategory").value = product.category;
+// Restore checked categories
+const productCategories = Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []);
+document.querySelectorAll('#editCategoryCheckboxes input[type=checkbox]').forEach(cb => {
+    cb.checked = productCategories.includes(cb.value);
+});
 document.getElementById("editPriceSmall").value = product.priceSmall || "";
 document.getElementById("editPriceMedium").value = product.priceMedium || product.price || "";
 document.getElementById("editPriceLarge").value = product.priceLarge || "";
@@ -447,7 +488,10 @@ const formData = new FormData();
 
 formData.append("productCode", document.getElementById("editProductCode").value);
 formData.append("name", document.getElementById("editName").value);
-formData.append("category", document.getElementById("editCategory").value);
+// Collect all checked categories
+document.querySelectorAll('#editCategoryCheckboxes input[type=checkbox]:checked').forEach(cb => {
+    formData.append("category", cb.value);
+});
 formData.append("priceSmall", document.getElementById("editPriceSmall").value);
 formData.append("priceMedium", document.getElementById("editPriceMedium").value);
 formData.append("priceLarge", document.getElementById("editPriceLarge").value);
