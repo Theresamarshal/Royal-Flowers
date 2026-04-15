@@ -9,6 +9,9 @@ const productRoutes = require("./routes/products");
 
 const app = express();
 
+// Trust Render's reverse proxy (needed for secure session cookies)
+app.set("trust proxy", 1);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -18,7 +21,11 @@ app.use(session({
     secret: process.env.SESSION_SECRET || "royal-flowers-secret-2025",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 8 } // 8 hours
+    cookie: { 
+        maxAge: 1000 * 60 * 60 * 8, // 8 hours
+        secure: process.env.NODE_ENV === "production", // require HTTPS in production
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+    }
 }));
 
 // Auth middleware
@@ -34,6 +41,11 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // serve static client files
 app.use(express.static(path.join(__dirname, "../client")));
+
+// Health check endpoint for Render
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
 
 app.use("/api/products", productRoutes);
 

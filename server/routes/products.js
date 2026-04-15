@@ -5,10 +5,15 @@ const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 
+// Explicitly configure Cloudinary with individual env vars
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 const Product = require("../models/product");
 
-// Cloudinary automatically reads CLOUDINARY_URL from environment variables
-// No explicit config() call needed
 
 // STORAGE CONFIG
 const storage = new CloudinaryStorage({
