@@ -1,126 +1,15 @@
-/* Reset and Base Styles */
-
-* {
-
-    margin: 0;
-
-    padding: 0;
-
-    box-sizing: border-box;
-
-}
-
-
-
-body {
-
-    font-family: 'Inter', sans-serif;
-
-    line-height: 1.6;
-
-    color: #555;
-
-    background-color: var(--ivory);
-
-}
-
-
-
-.container {
-
-    max-width: 1200px;
-
-    margin: 0 auto;
-
-    padding: 0 20px;
-
-}
-
-
-
-/* Typography */
-
-h1, h2, h3, h4 {
-
-    font-family: 'Playfair Display', serif;
-
-    margin-bottom: 1rem;
-
-
-    color: var(--black);
-}
-
-
-
-h1 {
-
-    font-size: 2.5rem;
-
-    font-weight: 700;
-
-    color: var(--gold);
-
-}
-
-
-
-h2 {
-
-    font-size: 2rem;
-
-    font-weight: 700;
-
-    color: var(--gold);
-
-}
-
-
-
-h3 {
-
-    font-size: 1.5rem;
-
-    font-weight: 600;
-
-    color: var(--gold);
-
-}
-
-
-
-h4 {
-
-    font-size: 1.2rem;
-
-    font-weight: 600;
-
-    color: var(--gold);
-
-}
-
-
-
-p {
-
-    margin-bottom: 1rem;
-
-    color: #666;
-
-}
-
-
-
-/* Luxury Gold & Black Palette */
+/* Royal Emerald & Gold Palette */
 :root {
+    --emerald: #023020;        /* Deep Emerald Green */
+    --emerald-light: #0d543e;  /* Soft Emerald */
     --gold: #D4AF37;           /* Main Gold */
-    --gold-light: #F3E5AB;     /* Soft Gold */
-    --gold-dark: #B8860B;      /* Rich Gold */
-    --black: #111111;          /* Deep Onyx Black */
-    --charcoal: #1A1A1A;       /* Soft Black */
-    --ivory: #FCFAF5;          /* Warm Ivory */
+    --gold-light: #F3E5AB;     /* Soft Gold accent */
+    --gold-dark: #B8860B;      /* Rich Gold Accent */
+    --ivory: #FCFAF5;          /* Warm Ivory Background */
     --white: #ffffff;
     --gray: #6c757d;
     --light-gray: #f8f9fa;
+    --black: #111111;
 }
 
 
@@ -129,7 +18,7 @@ p {
 
 .top-bar {
 
-    background: var(--black);
+    background: var(--emerald);
 
     color: white;
 
@@ -167,7 +56,7 @@ p {
 
 .main-header {
 
-    background: var(--black);
+    background: var(--emerald);
 
     padding: 20px 0;
 
@@ -539,7 +428,7 @@ p {
 
 .main-nav {
 
-    background: var(--charcoal);
+    background: var(--emerald-light);
 
     border-bottom: 2px solid var(--gold-light);
 
@@ -1352,7 +1241,7 @@ display: block;
 
 .footer {
 
-    background: var(--black);
+    background: var(--emerald);
 
     color: white;
 
@@ -5002,7 +4891,7 @@ gap:30px;
         right: -100%;
         width: 80%;
         height: 100vh;
-        background: white;
+        background: var(--emerald-light);
         box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         z-index: 2000;
