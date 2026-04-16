@@ -264,23 +264,31 @@ p {
 
     align-items: center;
 
-    font-size: 1.8rem;
+    height: 60px;
 
-    font-weight: 700;
-
-    color: var(--dark-pink);
-
-    font-family: 'Playfair Display', serif;
+    text-decoration: none;
 
 }
 
 
 
-.logo i {
+.logo-img {
 
-    margin-right: 10px;
+    height: 100%;
 
-    font-size: 2rem;
+    width: auto;
+
+    object-fit: contain;
+
+    transition: transform 0.3s ease;
+
+}
+
+
+
+.logo:hover .logo-img {
+
+    transform: scale(1.05);
 
 }
 
@@ -4939,16 +4947,31 @@ gap:30px;
 
     /* Header & Nav Improvements */
     .header-content {
-        padding: 8px 0;
+        padding: 5px 0;
         gap: 15px;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .logo {
-        font-size: 1.5rem;
+        height: 50px;
+        order: 1;
     }
 
-    .logo i {
-        font-size: 1.6rem;
+    .header-actions {
+        order: 2;
+        gap: 10px;
+    }
+
+    .social-icons {
+        display: flex !important; /* Force show on mobile if requested */
+        gap: 8px;
+    }
+
+    .social-icons a {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
     }
 
     .search-bar {
