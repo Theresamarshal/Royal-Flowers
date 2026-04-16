@@ -1,15 +1,15 @@
-/* Regal Velvet & Gold Palette */
+/* Sophisticated Muted Pastel Palette */
 :root {
-    --burgundy: #4a0404;       /* Deep Burgundy Red */
-    --burgundy-light: #5d0e0e; /* Soft Burgundy */
-    --gold: #D4AF37;           /* Main Gold */
+    --pastel-rose: #d4a5a5;    /* Dusty Rose (Muted, not bright) */
+    --pastel-sage: #9fac96;    /* Muted Sage Green */
+    --pastel-cream: #f9f4f1;   /* Warm Soft Cream */
+    --gold: #D4AF37;           /* Main Gold (Keep for branding logo) */
     --gold-light: #F3E5AB;     /* Soft Gold accent */
     --gold-dark: #B8860B;      /* Rich Gold Accent */
-    --ivory: #FDF9F6;          /* Rose-Ivory Background */
     --white: #ffffff;
     --gray: #6c757d;
     --light-gray: #f8f9fa;
-    --black: #111111;
+    --black: #333333;          /* Soft Charcoal for text */
 }
 
 
@@ -18,7 +18,7 @@
 
 .top-bar {
 
-    background: var(--burgundy);
+    background: var(--pastel-rose);
 
     color: white;
 
@@ -56,7 +56,7 @@
 
 .main-header {
 
-    background: var(--burgundy);
+    background: var(--pastel-rose);
 
     padding: 20px 0;
 
@@ -428,7 +428,7 @@
 
 .main-nav {
 
-    background: var(--burgundy-light);
+    background: var(--pastel-sage);
 
     border-bottom: 2px solid var(--gold-light);
 
@@ -1241,7 +1241,7 @@ display: block;
 
 .footer {
 
-    background: var(--burgundy);
+    background: var(--pastel-rose);
 
     color: white;
 
@@ -4891,7 +4891,7 @@ gap:30px;
         right: -100%;
         width: 80%;
         height: 100vh;
-        background: var(--burgundy-light);
+        background: var(--pastel-sage);
         box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         z-index: 2000;
