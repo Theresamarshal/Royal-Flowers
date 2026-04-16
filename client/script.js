@@ -203,7 +203,7 @@ function displayProducts(products) {
                 <div class="price-whatsapp">
                     <span class="price">₹${product.priceMedium || product.price || 'N/A'}</span>
 
-                    <a href="https://wa.me/919747577095?text=${encodeURIComponent(`Enquiry for ${product.name}${product.productCode ? ` [SKU: ${product.productCode}]` : ''}: I'd like to check details for this arrangement.\n\nProduct Link: ${window.location.origin}${product.image}`)}"
+                    <a href="https://wa.me/919747577302?text=${encodeURIComponent(`Enquiry for ${product.name}${product.productCode ? ` [SKU: ${product.productCode}]` : ''}: I'd like to check details for this arrangement.\n\nProduct Link: ${window.location.origin}${product.image}`)}"
                     target="_blank"
                     class="whatsapp-icon">
                         <i class="fab fa-whatsapp"></i>
