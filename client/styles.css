@@ -20,7 +20,7 @@ body {
 
     color: #555;
 
-    background-color: #fff5f8;
+    background-color: var(--ivory);
 
 }
 
@@ -46,6 +46,8 @@ h1, h2, h3, h4 {
 
     margin-bottom: 1rem;
 
+
+    color: var(--black);
 }
 
 
@@ -56,7 +58,7 @@ h1 {
 
     font-weight: 700;
 
-    color: #d63384;
+    color: var(--gold);
 
 }
 
@@ -68,7 +70,7 @@ h2 {
 
     font-weight: 700;
 
-    color: #d63384;
+    color: var(--gold);
 
 }
 
@@ -80,7 +82,7 @@ h3 {
 
     font-weight: 600;
 
-    color: #d63384;
+    color: var(--gold);
 
 }
 
@@ -92,7 +94,7 @@ h4 {
 
     font-weight: 600;
 
-    color: #d63384;
+    color: var(--gold);
 
 }
 
@@ -108,28 +110,17 @@ p {
 
 
 
-/* Pastel Color Palette */
-
+/* Luxury Gold & Black Palette */
 :root {
-
-    --primary-pink: #f8d7da;
-
-    --secondary-pink: #f1c0d4;
-
-    --accent-pink: #e6a8c7;
-
-    --dark-pink: #d63384;
-
-    --light-pink: #ffe0ec;
-
-    --cream: #fff5f8;
-
+    --gold: #D4AF37;           /* Main Gold */
+    --gold-light: #F3E5AB;     /* Soft Gold */
+    --gold-dark: #B8860B;      /* Rich Gold */
+    --black: #111111;          /* Deep Onyx Black */
+    --charcoal: #1A1A1A;       /* Soft Black */
+    --ivory: #FCFAF5;          /* Warm Ivory */
     --white: #ffffff;
-
     --gray: #6c757d;
-
     --light-gray: #f8f9fa;
-
 }
 
 
@@ -138,7 +129,7 @@ p {
 
 .top-bar {
 
-    background: linear-gradient(135deg, var(--accent-pink), var(--secondary-pink));
+    background: var(--black);
 
     color: white;
 
@@ -176,7 +167,7 @@ p {
 
 .main-header {
 
-    background: var(--white);
+    background: var(--black);
 
     padding: 20px 0;
 
@@ -208,7 +199,7 @@ p {
 
     align-items: center;
 
-    background: var(--cream);
+    background: var(--white);
 
     border-radius: 25px;
 
@@ -246,7 +237,7 @@ p {
 
     border: none;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     cursor: pointer;
 
@@ -346,7 +337,7 @@ p {
 
     transition: all 0.3s ease;
 
-    border-left: 3px solid var(--accent-pink);
+    border-left: 3px solid var(--gold);
 
 }
 
@@ -364,7 +355,7 @@ p {
 
 .phone i {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.1rem;
 
@@ -388,7 +379,7 @@ p {
 
 .phone strong {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-weight: 700;
 
@@ -422,9 +413,9 @@ p {
 
     height: 35px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     border-radius: 50%;
 
@@ -438,7 +429,7 @@ p {
 
 .social-icons a:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -460,7 +451,7 @@ p {
 
 .admin-icon {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.2rem;
 
@@ -472,7 +463,7 @@ p {
 
 .admin-icon:hover {
 
-    color: var(--primary-pink);
+    color: var(--gold-light);
 
     transform: scale(1.1);
 
@@ -494,9 +485,9 @@ p {
 
     height: 40px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     border-radius: 50%;
 
@@ -510,7 +501,7 @@ p {
 
 .cart-icon:hover, .user-icon:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -526,7 +517,7 @@ p {
 
     right: -5px;
 
-    background: var(--dark-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -548,9 +539,9 @@ p {
 
 .main-nav {
 
-    background: var(--white);
+    background: var(--charcoal);
 
-    border-bottom: 2px solid var(--primary-pink);
+    border-bottom: 2px solid var(--gold-light);
 
     position: sticky;
 
@@ -580,7 +571,7 @@ p {
 
     text-decoration: none;
 
-    color: var(--dark-pink);
+    color: var(--white);
 
     font-weight: 500;
 
@@ -596,9 +587,9 @@ p {
 
 .nav-link:hover, .nav-link.active {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
-    background: var(--primary-pink);
+    background: var(--gold-light);
 
 }
 
@@ -618,7 +609,7 @@ p {
 
     height: 3px;
 
-    background: var(--dark-pink);
+    background: var(--gold);
 
 }
 
@@ -690,7 +681,7 @@ p {
 
     padding: 12px 20px;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     text-decoration: none;
 
@@ -702,7 +693,7 @@ p {
 
 .dropdown-menu a:hover {
 
-    background: var(--primary-pink);
+    background: var(--gold-light);
 
 }
 
@@ -780,7 +771,7 @@ p {
 
     padding: 40px 0;
 
-    background: var(--cream);
+    background: var(--ivory);
 
 }
 
@@ -1063,7 +1054,7 @@ display: block;
 
     font-size: 1.2rem;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -1105,9 +1096,9 @@ display: block;
 
 .categories a:hover {
 
-    background: var(--primary-pink);
+    background: var(--gold-light);
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     transform: translateX(5px);
 
@@ -1143,7 +1134,7 @@ display: block;
 
     padding-bottom: 20px;
 
-    border-bottom: 1px solid var(--primary-pink);
+    border-bottom: 1px solid var(--gold-light);
 
 }
 
@@ -1195,13 +1186,13 @@ display: block;
 
     padding: 8px 15px;
 
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--gold-light);
 
     border-radius: 8px;
 
     background: var(--white);
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 0.9rem;
 
@@ -1237,7 +1228,7 @@ display: block;
 
     transition: all 0.3s ease;
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
 }
 
@@ -1301,7 +1292,7 @@ display: block;
 
     font-size: 1.1rem;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -1315,7 +1306,7 @@ display: block;
 
     font-weight: 700;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     margin-bottom: 15px;
 
@@ -1329,7 +1320,7 @@ display: block;
 
     padding: 10px 20px;
 
-    background: linear-gradient(135deg, var(--accent-pink), var(--secondary-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
 
     color: white;
 
@@ -1349,7 +1340,7 @@ display: block;
 
 .add-to-cart:hover {
 
-    background: linear-gradient(135deg, var(--dark-pink), var(--accent-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold));
 
     transform: translateY(-2px);
 
@@ -1361,7 +1352,7 @@ display: block;
 
 .footer {
 
-    background: linear-gradient(135deg, var(--dark-pink), var(--accent-pink));
+    background: var(--black);
 
     color: white;
 
@@ -1677,7 +1668,7 @@ display: block;
 
     background: var(--white);
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 15px;
 
@@ -1741,7 +1732,7 @@ display: block;
 
     font-weight: 600;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 0.9rem;
 
@@ -1767,7 +1758,7 @@ display: block;
 
     padding: 8px;
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 5px;
 
@@ -1781,13 +1772,13 @@ display: block;
 
     padding: 8px;
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 5px;
 
     background: var(--white);
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 0.9rem;
 
@@ -1827,7 +1818,7 @@ display: block;
 
     border-radius: 50%;
 
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--gold-light);
 
 }
 
@@ -1849,7 +1840,7 @@ display: block;
 
     padding: 10px 20px;
 
-    background: linear-gradient(135deg, var(--accent-pink), var(--secondary-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
 
     color: white;
 
@@ -1869,7 +1860,7 @@ display: block;
 
 .apply-filters-btn:hover {
 
-    background: linear-gradient(135deg, var(--dark-pink), var(--accent-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold));
 
     transform: translateY(-2px);
 
@@ -1981,7 +1972,7 @@ display: block;
 
     justify-content: center;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     transition: all 0.3s ease;
 
@@ -1991,7 +1982,7 @@ display: block;
 
 .carousel-prev:hover, .carousel-next:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -2027,7 +2018,7 @@ display: block;
 
     transition: all 0.3s ease;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2043,7 +2034,7 @@ display: block;
 
 .zoom-overlay:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -2115,9 +2106,9 @@ display: block;
 
     height: 35px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 50%;
 
@@ -2131,7 +2122,7 @@ display: block;
 
     transition: all 0.3s ease;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2139,7 +2130,7 @@ display: block;
 
 .wishlist-btn:hover, .quick-view-btn:hover, .share-btn:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -2177,7 +2168,7 @@ display: block;
 
     background: var(--white);
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 15px;
 
@@ -2223,7 +2214,7 @@ display: block;
 
     font-size: 1rem;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     margin-bottom: 5px;
 
@@ -2237,7 +2228,7 @@ display: block;
 
     font-weight: 600;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2331,7 +2322,7 @@ display: block;
 
     padding: 20px;
 
-    border-bottom: 1px solid var(--primary-pink);
+    border-bottom: 1px solid var(--gold-light);
 
 }
 
@@ -2341,7 +2332,7 @@ display: block;
 
     margin: 0;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2367,7 +2358,7 @@ display: block;
 
 .close-modal:hover {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2401,9 +2392,9 @@ display: block;
 
     padding: 10px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 10px;
 
@@ -2411,7 +2402,7 @@ display: block;
 
     transition: all 0.3s ease;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-weight: 500;
 
@@ -2421,7 +2412,7 @@ display: block;
 
 .tab-btn.active {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -2445,7 +2436,7 @@ display: block;
 
     font-weight: 500;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -2457,7 +2448,7 @@ display: block;
 
     padding: 12px;
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
     border-radius: 10px;
 
@@ -2473,7 +2464,7 @@ display: block;
 
     outline: none;
 
-    border-color: var(--dark-pink);
+    border-color: var(--gold);
 
 }
 
@@ -2511,7 +2502,7 @@ display: block;
 
 .forgot-password {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     text-decoration: none;
 
@@ -2535,7 +2526,7 @@ display: block;
 
     padding: 12px;
 
-    background: linear-gradient(135deg, var(--accent-pink), var(--secondary-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
 
     color: white;
 
@@ -2557,7 +2548,7 @@ display: block;
 
 .login-btn:hover, .register-btn:hover {
 
-    background: linear-gradient(135deg, var(--dark-pink), var(--accent-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold));
 
     transform: translateY(-2px);
 
@@ -2733,7 +2724,7 @@ display: block;
 
     font-size: 3rem;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     animation: spin 2s linear infinite;
 
@@ -2815,7 +2806,7 @@ display: block;
 
     padding: 60px 0;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     min-height: 80vh;
 
@@ -2841,7 +2832,7 @@ display: block;
 
 .contact-info-section h2 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 2.5rem;
 
@@ -2893,7 +2884,7 @@ display: block;
 
 .contact-item h3 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.5rem;
 
@@ -2911,7 +2902,7 @@ display: block;
 
 .contact-item h3 i {
 
-    color: var(--accent-pink);
+    color: var(--gold);
 
     font-size: 1.2rem;
 
@@ -2933,7 +2924,7 @@ display: block;
 
 .contact-item p i {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     margin-right: 8px;
 
@@ -2983,7 +2974,7 @@ display: block;
 
     border-radius: 10px;
 
-    border-left: 3px solid var(--accent-pink);
+    border-left: 3px solid var(--gold);
 
 }
 
@@ -3031,11 +3022,11 @@ display: block;
 
     text-decoration: none;
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     transition: all 0.3s ease;
 
-    border: 1px solid var(--primary-pink);
+    border: 1px solid var(--gold-light);
 
 }
 
@@ -3043,7 +3034,7 @@ display: block;
 
 .social-link-large:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     color: white;
 
@@ -3075,7 +3066,7 @@ display: block;
 
 .contact-form-section h2 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 2.5rem;
 
@@ -3135,7 +3126,7 @@ display: block;
 
 .form-group label {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-weight: 500;
 
@@ -3153,7 +3144,7 @@ display: block;
 
     padding: 12px 15px;
 
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--gold-light);
 
     border-radius: 8px;
 
@@ -3173,7 +3164,7 @@ display: block;
 
     outline: none;
 
-    border-color: var(--dark-pink);
+    border-color: var(--gold);
 
     box-shadow: 0 0 0 2px rgba(214, 51, 132, 0.2);
 
@@ -3235,7 +3226,7 @@ display: block;
 
     padding: 15px 30px;
 
-    background: linear-gradient(135deg, var(--accent-pink), var(--secondary-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
 
     color: white;
 
@@ -3259,7 +3250,7 @@ display: block;
 
 .submit-btn:hover {
 
-    background: linear-gradient(135deg, var(--dark-pink), var(--accent-pink));
+    background: linear-gradient(135deg, var(--gold), var(--gold));
 
     transform: translateY(-2px);
 
@@ -3275,7 +3266,7 @@ display: block;
 
     padding: 80px 0;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     min-height: 80vh;
 
@@ -3307,7 +3298,7 @@ display: block;
 
 .about-text h1 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 3rem;
 
@@ -3321,7 +3312,7 @@ display: block;
 
 .about-text h2 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 2rem;
 
@@ -3391,7 +3382,7 @@ display: block;
 
 .value-item i {
 
-    color: var(--accent-pink);
+    color: var(--gold);
 
     font-size: 2.5rem;
 
@@ -3405,7 +3396,7 @@ display: block;
 
 .value-item h3 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.3rem;
 
@@ -3843,7 +3834,7 @@ display: block;
 
     padding: 60px 0;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     min-height: 80vh;
 
@@ -3863,7 +3854,7 @@ display: block;
 
 .admin-header h1 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 3rem;
 
@@ -3937,7 +3928,7 @@ display: block;
 
 .form-header h2 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.8rem;
 
@@ -3965,7 +3956,7 @@ display: block;
 
 .close-btn:hover {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
 }
 
@@ -4005,7 +3996,7 @@ display: block;
 
 .form-group label {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-weight: 600;
 
@@ -4023,7 +4014,7 @@ display: block;
 
     padding: 12px;
 
-    border: 2px solid var(--light-pink);
+    border: 2px solid var(--ivory);
 
     border-radius: 8px;
 
@@ -4043,7 +4034,7 @@ display: block;
 
     outline: none;
 
-    border-color: var(--primary-pink);
+    border-color: var(--gold-light);
 
 }
 
@@ -4101,11 +4092,11 @@ display: block;
 
     padding: 15px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     border-radius: 8px;
 
-    border: 2px solid var(--light-pink);
+    border: 2px solid var(--ivory);
 
 }
 
@@ -4123,7 +4114,7 @@ display: block;
 
 .products-list h2 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 2rem;
 
@@ -4207,7 +4198,7 @@ gap:30px;
 
 .admin-product-card .product-info h3 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 1.3rem;
 
@@ -4233,7 +4224,7 @@ gap:30px;
 
     padding: 15px 20px;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     display: flex;
 
@@ -4273,7 +4264,7 @@ gap:30px;
 
 .btn-primary {
 
-    background: var(--primary-pink);
+    background: var(--gold-light);
 
     color: white;
 
@@ -4283,7 +4274,7 @@ gap:30px;
 
 .btn-primary:hover {
 
-    background: var(--accent-pink);
+    background: var(--gold);
 
     transform: translateY(-2px);
 
@@ -4509,7 +4500,7 @@ gap:30px;
 
     padding: 60px 0;
 
-    background: var(--cream);
+    background: var(--ivory);
 
     min-height: 80vh;
 
@@ -4529,7 +4520,7 @@ gap:30px;
 
 .category-header h1 {
 
-    color: var(--dark-pink);
+    color: var(--gold);
 
     font-size: 3rem;
 
@@ -4992,8 +4983,8 @@ gap:30px;
         justify-content: center;
         width: 38px;
         height: 38px;
-        background: var(--cream);
-        color: var(--dark-pink);
+        background: var(--ivory);
+        color: var(--gold);
         border-radius: 50%;
         cursor: pointer;
         font-size: 1.2rem;
@@ -5001,7 +4992,7 @@ gap:30px;
     }
 
     .menu-toggle:active {
-        background: var(--primary-pink);
+        background: var(--gold-light);
     }
 
     /* Professional Mobile Menu */
@@ -5036,12 +5027,12 @@ gap:30px;
         width: 100%;
         padding: 15px 0;
         font-size: 1.1rem;
-        border-bottom: 1px solid var(--light-pink);
+        border-bottom: 1px solid var(--ivory);
     }
 
     .nav-link:hover, .nav-link.active {
         background: transparent;
-        color: var(--dark-pink);
+        color: var(--gold);
     }
 
     .nav-link.active::after {
@@ -5054,7 +5045,7 @@ gap:30px;
         opacity: 1;
         visibility: visible;
         transform: none;
-        background: var(--light-pink);
+        background: var(--ivory);
         margin-top: 5px;
         display: none; /* Toggle via JS if needed, or keep expanded */
         box-shadow: none;
@@ -5117,12 +5108,12 @@ gap:30px;
     .categories a {
         padding: 8px 15px;
         white-space: nowrap;
-        background: var(--light-pink);
+        background: var(--ivory);
         font-size: 0.85rem;
     }
 
     .categories a.active {
-        background: var(--dark-pink);
+        background: var(--gold);
         color: white;
     }
 
