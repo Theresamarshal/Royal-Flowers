@@ -1,5 +1,8 @@
 /* Sophisticated Muted Pastel Palette */
 :root {
+    --header-bg: #111111;      /* High contrast black for logo area */
+    --footer-bg: #111111;
+
     --pastel-rose: #d4a5a5;    /* Dusty Rose (Muted, not bright) */
     --pastel-sage: #9fac96;    /* Muted Sage Green */
     --pastel-cream: #f9f4f1;   /* Warm Soft Cream */
@@ -18,7 +21,7 @@
 
 .top-bar {
 
-    background: var(--pastel-rose);
+    background: var(--header-bg);
 
     color: white;
 
@@ -56,7 +59,7 @@
 
 .main-header {
 
-    background: var(--pastel-rose);
+    background: var(--header-bg);
 
     padding: 20px 0;
 
@@ -1241,7 +1244,7 @@ display: block;
 
 .footer {
 
-    background: var(--pastel-rose);
+    background: var(--footer-bg);
 
     color: white;
 
