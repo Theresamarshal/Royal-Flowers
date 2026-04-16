@@ -25,6 +25,9 @@ function initializeApp() {
 
     // Set up sidebar category listeners
     setupCategoryListeners();
+
+    // Set up Mobile Menu
+    setupMobileMenu();
 }
 
 function hideLoader() {
@@ -124,6 +127,40 @@ function filterByCategory(categoryName, updateURL = true) {
     });
 
     displayProducts(currentProducts);
+}
+
+function setupMobileMenu() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mainNav = document.querySelector('.main-nav');
+    
+    if (!menuBtn || !mainNav) return;
+
+    // Create overlay if it doesn't exist
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
+
+    function toggleMenu() {
+        mainNav.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // Close menu when a link is clicked
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mainNav.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
 }
 
 function displayProducts(products) {
