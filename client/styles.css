@@ -1,11 +1,11 @@
-/* Royal Emerald & Gold Palette */
+/* Regal Velvet & Gold Palette */
 :root {
-    --emerald: #023020;        /* Deep Emerald Green */
-    --emerald-light: #0d543e;  /* Soft Emerald */
+    --burgundy: #4a0404;       /* Deep Burgundy Red */
+    --burgundy-light: #5d0e0e; /* Soft Burgundy */
     --gold: #D4AF37;           /* Main Gold */
     --gold-light: #F3E5AB;     /* Soft Gold accent */
     --gold-dark: #B8860B;      /* Rich Gold Accent */
-    --ivory: #FCFAF5;          /* Warm Ivory Background */
+    --ivory: #FDF9F6;          /* Rose-Ivory Background */
     --white: #ffffff;
     --gray: #6c757d;
     --light-gray: #f8f9fa;
@@ -18,7 +18,7 @@
 
 .top-bar {
 
-    background: var(--emerald);
+    background: var(--burgundy);
 
     color: white;
 
@@ -56,7 +56,7 @@
 
 .main-header {
 
-    background: var(--emerald);
+    background: var(--burgundy);
 
     padding: 20px 0;
 
@@ -428,7 +428,7 @@
 
 .main-nav {
 
-    background: var(--emerald-light);
+    background: var(--burgundy-light);
 
     border-bottom: 2px solid var(--gold-light);
 
@@ -1241,7 +1241,7 @@ display: block;
 
 .footer {
 
-    background: var(--emerald);
+    background: var(--burgundy);
 
     color: white;
 
@@ -4891,7 +4891,7 @@ gap:30px;
         right: -100%;
         width: 80%;
         height: 100vh;
-        background: var(--emerald-light);
+        background: var(--burgundy-light);
         box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         z-index: 2000;
