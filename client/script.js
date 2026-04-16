@@ -11,7 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initializeApp() {
     console.log("Initializing app...");
-    loadProducts(); // displayRecentlyViewed is called inside after products load
+    
+    // Check for category in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    if (categoryParam) {
+        console.log("URL Category detected:", categoryParam);
+        loadProducts(categoryParam);
+    } else {
+        loadProducts(); // displayRecentlyViewed is called inside after products load
+    }
+
+    // Set up sidebar category listeners
+    setupCategoryListeners();
 }
 
 function hideLoader() {
@@ -21,7 +34,7 @@ function hideLoader() {
     }
 }
 
-async function loadProducts() {
+async function loadProducts(targetCategory = null) {
     console.log("Loading products...");
 
     try {
@@ -33,13 +46,18 @@ async function loadProducts() {
         }
 
         const products = await response.json();
-        console.log("Products:", products);
+        console.log("Products loaded:", products.length);
 
         currentProducts = products;
         originalProducts = [...products]; // Store original products
 
-        displayProducts(products);
-        displayRecentlyViewed(); // Called here so it can filter against live products
+        if (targetCategory && targetCategory !== 'all') {
+            filterByCategory(targetCategory, false); // false = don't update URL again
+        } else {
+            displayProducts(products);
+        }
+
+        displayRecentlyViewed(); 
         hideLoader();
 
     } catch (error) {
@@ -59,6 +77,53 @@ async function loadProducts() {
 
         hideLoader();
     }
+}
+
+function setupCategoryListeners() {
+    const sidebarLinks = document.querySelectorAll('.category-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // If on shop.html, prevent reload and filter dynamically
+            if (window.location.pathname.includes('shop.html') || window.location.pathname === '/' || window.location.pathname === '') {
+                e.preventDefault();
+                const category = this.getAttribute('data-category');
+                filterByCategory(category);
+            }
+        });
+    });
+}
+
+function filterByCategory(categoryName, updateURL = true) {
+    isSearching = false; // Reset search state when filtering by category
+    
+    console.log("Filtering by category:", categoryName);
+
+    if (!categoryName || categoryName === 'all') {
+        currentProducts = [...originalProducts];
+        if (updateURL) window.history.pushState({}, '', 'shop.html');
+    } else {
+        currentProducts = originalProducts.filter(product => {
+            const cats = Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []);
+            // Case-insensitive match
+            return cats.some(c => c.toLowerCase() === categoryName.toLowerCase());
+        });
+        if (updateURL) window.history.pushState({}, '', `shop.html?category=${encodeURIComponent(categoryName)}`);
+    }
+
+    // Update active UI state in sidebar
+    document.querySelectorAll('.category-link').forEach(link => {
+        if (link.getAttribute('data-category') === categoryName) {
+            link.classList.add('active');
+            link.style.fontWeight = "bold";
+            link.style.color = "#d63384";
+        } else {
+            link.classList.remove('active');
+            link.style.fontWeight = "normal";
+            link.style.color = "";
+        }
+    });
+
+    displayProducts(currentProducts);
 }
 
 function displayProducts(products) {
