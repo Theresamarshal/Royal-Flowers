@@ -807,14 +807,15 @@ Product Link: ${window.location.origin}${currentProduct.image}`;
                 
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
-                const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${currentFinalPrice}&cu=INR`;
+                // GPay specific deep link format
+                const gpayUrl = `tez://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${currentFinalPrice}&cu=INR`;
                 
                 document.getElementById('upiAmountText').textContent = currentFinalPrice;
-                document.getElementById('upiAppBtn').href = upiUrl;
+                document.getElementById('upiAppBtn').href = gpayUrl;
                 document.getElementById('upiPaymentSection').style.display = 'block';
                 
-                // Automatically try to open the UPI app
-                window.location.href = upiUrl;
+                // Automatically try to open GPay
+                window.location.href = gpayUrl;
                 
                 return;
             }
