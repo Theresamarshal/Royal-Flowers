@@ -220,7 +220,7 @@ function displayProducts(products) {
                 </div>
 
                 <button class="shop-now-btn"
-                onclick="shopNow('${product._id}','${product.name}')">
+                onclick="shopNow('${product._id}')">
                     Shop Now
                 </button>
             </div>
@@ -296,12 +296,12 @@ function displayRecentlyViewed() {
 
             <h4>${product.name}</h4>
             <p class="price">₹${displayPrice}</p>
-            <button class="shop-now-btn" onclick="shopNow('${product._id}','${product.name}')">
+            <button class="shop-now-btn" onclick="shopNow('${product._id}')">
                 View Details
             </button>
         `;
 
-        div.onclick = () => shopNow(product._id, product.name);
+        div.onclick = () => shopNow(product._id);
 
         container.appendChild(div);
 
@@ -309,9 +309,9 @@ function displayRecentlyViewed() {
 
 }
 
-function shopNow(productId, productName) {
+function shopNow(productId) {
 
-    console.log("Opening product:", productName);
+    console.log("Opening product ID:", productId);
 
     let selected = currentProducts.find(p => p._id === productId);
 
