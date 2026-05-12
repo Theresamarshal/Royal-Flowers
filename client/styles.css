@@ -2,7 +2,7 @@
 :root {
     --pastel-rose-dark: #8c5a5a;  /* Darker shade of Dusty Rose */
 
-    --header-bg: var(--pastel-rose-dark);      /* High contrast black for logo area */
+    --header-bg: #faf7f4;      /* Off-white header */
     --footer-bg: var(--pastel-rose-dark);
 
     --pastel-rose: #d4a5a5;    /* Dusty Rose (Muted, not bright) */
@@ -23,13 +23,15 @@
 
 .top-bar {
 
-    background: var(--pastel-rose-dark);
+    background: #faf7f4;
 
-    color: white;
+    color: var(--black);
 
     padding: 8px 0;
 
     font-size: 0.9rem;
+
+    border-bottom: 1px solid rgba(140, 90, 90, 0.15);
 
 }
 
@@ -61,11 +63,13 @@
 
 .main-header {
 
-    background: var(--pastel-rose-dark);
+    background: #faf7f4;
 
     padding: 20px 0;
 
-    border-bottom: 1px solid rgba(212, 159, 189, 0.3);
+    border-bottom: none;
+
+    margin-bottom: 0;
 
 }
 
@@ -436,13 +440,17 @@
 
 .main-nav {
 
-    background: var(--pastel-sage);
+    background: #e8e8e8;
 
     border-bottom: 2px solid var(--gold-light);
 
     position: sticky;
 
     top: 0;
+
+    margin-top: 0;
+
+    margin-bottom: 0;
 
     z-index: 100;
 
@@ -460,6 +468,10 @@
 
     gap: 40px;
 
+    margin: 0;
+
+    padding: 0;
+
 }
 
 
@@ -468,11 +480,13 @@
 
     text-decoration: none;
 
-    color: var(--white);
+    color: var(--black);
 
     font-weight: 500;
 
     padding: 15px 0;
+
+    display: block;
 
     transition: all 0.3s ease;
 
@@ -1249,13 +1263,15 @@ display: block;
 
 .footer {
 
-    background: var(--pastel-rose-dark);
+    background: #faf7f4;
 
-    color: white;
+    color: var(--black);
 
     padding: 50px 0 20px;
 
     margin-top: 60px;
+
+    border-top: 2px solid rgba(140, 90, 90, 0.15);
 
 }
 
@@ -1289,7 +1305,7 @@ display: block;
 
 .footer-section h3 {
 
-    color: white;
+    color: var(--gold-dark);
 
     margin-bottom: 15px;
 
@@ -1331,7 +1347,7 @@ display: block;
 
     margin-bottom: 20px;
 
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--black);
 
 }
 
@@ -1371,9 +1387,9 @@ display: block;
 
     height: 40px;
 
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(140, 90, 90, 0.12);
 
-    color: white;
+    color: var(--pastel-rose-dark);
 
     border-radius: 50%;
 
@@ -1389,7 +1405,9 @@ display: block;
 
 .socials a:hover {
 
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--pastel-rose-dark);
+
+    color: white;
 
     transform: translateY(-3px);
 
@@ -1415,7 +1433,7 @@ display: block;
 
 .footer-section.links a {
 
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--black);
 
     text-decoration: none;
 
@@ -1429,7 +1447,7 @@ display: block;
 
 .footer-section.links a:hover {
 
-    color: white;
+    color: var(--gold-dark);
 
     transform: translateX(5px);
 
@@ -1451,7 +1469,7 @@ display: block;
 
     margin-bottom: 10px;
 
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--black);
 
     font-size: 0.95rem;
 
@@ -1463,7 +1481,7 @@ display: block;
 
 .footer-section.serving li:hover {
 
-    color: white;
+    color: var(--gold-dark);
 
     transform: translateX(5px);
 
@@ -1493,7 +1511,7 @@ display: block;
 
     padding: 10px;
 
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(140, 90, 90, 0.08);
 
     border-radius: 8px;
 
@@ -1505,7 +1523,7 @@ display: block;
 
 .payment-item:hover {
 
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(140, 90, 90, 0.15);
 
     transform: translateY(-2px);
 
@@ -1541,9 +1559,9 @@ display: block;
 
     padding-top: 30px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(140, 90, 90, 0.15);
 
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--gray);
 
     font-size: 0.9rem;
 
@@ -2867,7 +2885,7 @@ display: block;
 
     padding: 15px;
 
-    background: rgba(214, 51, 132, 0.1);
+    background: #ffffff;
 
     border-radius: 10px;
 
