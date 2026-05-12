@@ -550,6 +550,19 @@
                 <button type="submit" id="payNowBtn" class="pay-now-btn">Pay <span id="payNowAmount"></span> Securely</button>
             </form>
             
+            <!-- UPI Payment Section -->
+            <div id="upiPaymentSection" style="display: none; text-align: center; padding: 20px;">
+                <h3 style="color: #d63384; margin-bottom: 15px;">Scan to Pay via UPI</h3>
+                <p style="margin-bottom: 10px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
+                <div style="background: white; padding: 15px; display: inline-block; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                    <img id="upiQrCode" src="" alt="UPI QR Code" style="width: 200px; height: 200px;">
+                </div>
+                <p style="font-size: 1rem; color: #555; margin-bottom: 5px;">UPI ID: <strong>manujerald@okicici</strong></p>
+                <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Open GPay, PhonePe, or Paytm to scan</p>
+                <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #d63384;">I have completed the payment</button>
+                <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer; text-decoration: underline;">Go Back</button>
+            </div>
+            
             <div id="paymentSuccess" style="display: none; text-align: center; padding: 20px;">
                 <i class="fas fa-check-circle" style="color: #28a745; font-size: 4rem; margin-bottom: 15px;"></i>
                 <h2 style="color: #28a745;">Payment Successful!</h2>
@@ -743,7 +756,6 @@ Product Link: ${window.location.origin}${currentProduct.image}`;
 
         function buyNow() {
             if (currentProduct) {
-                // Open Checkout Modal instead of standard alert
                 document.getElementById('checkoutItemName').textContent = `${currentProduct.name} (${selectedSize.toUpperCase()})`;
                 document.getElementById('checkoutTotalAmount').textContent = `₹${currentFinalPrice}`;
                 document.getElementById('payNowAmount').textContent = `₹${currentFinalPrice}`;
@@ -751,6 +763,7 @@ Product Link: ${window.location.origin}${currentProduct.image}`;
                 
                 // Reset form state
                 document.getElementById('checkoutForm').style.display = 'block';
+                document.getElementById('upiPaymentSection').style.display = 'none';
                 document.getElementById('paymentSuccess').style.display = 'none';
                 document.getElementById('paymentProcessing').style.display = 'none';
                 document.getElementById('payNowBtn').style.display = 'block';
@@ -784,15 +797,48 @@ Product Link: ${window.location.origin}${currentProduct.image}`;
             
             console.log("Order Received:", formData);
             
+            const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            
+            if (selectedPaymentMethod === 'upi') {
+                // Show UPI QR Code
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.getElementById('checkoutOrderDetails').style.display = 'none';
+                
+                const upiId = "manujerald@okicici";
+                const payeeName = "Royal Flowers";
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${currentFinalPrice}&cu=INR`;
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
+                
+                document.getElementById('upiAmountText').textContent = currentFinalPrice;
+                document.getElementById('upiQrCode').src = qrUrl;
+                document.getElementById('upiPaymentSection').style.display = 'block';
+                return;
+            }
+            
+            completePaymentSimulation();
+        }
+
+        function confirmUpiPayment() {
+            document.getElementById('upiPaymentSection').style.display = 'none';
+            completePaymentSimulation();
+        }
+
+        function cancelUpiPayment() {
+            document.getElementById('upiPaymentSection').style.display = 'none';
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.getElementById('checkoutOrderDetails').style.display = 'block';
+        }
+
+        function completePaymentSimulation() {
             // Hide Pay button, show processing
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('checkoutOrderDetails').style.display = 'none';
             document.getElementById('payNowBtn').style.display = 'none';
             document.getElementById('paymentProcessing').style.display = 'block';
             
             // Simulate payment API call latency (2 seconds)
             setTimeout(() => {
-                document.getElementById('checkoutForm').style.display = 'none';
-                document.getElementById('checkoutOrderDetails').style.display = 'none';
-                
+                document.getElementById('paymentProcessing').style.display = 'none';
                 // Show success
                 document.getElementById('paymentSuccess').style.display = 'block';
                 
