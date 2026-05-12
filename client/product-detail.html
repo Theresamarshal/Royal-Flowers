@@ -843,23 +843,62 @@ Image: ${currentProduct.image}`;
             document.getElementById('checkoutOrderDetails').style.display = 'block';
         }
 
-        function completePaymentSimulation() {
+        async function completePaymentSimulation() {
             // Hide Pay button, show processing
             document.getElementById('checkoutForm').style.display = 'none';
             document.getElementById('checkoutOrderDetails').style.display = 'none';
             document.getElementById('payNowBtn').style.display = 'none';
             document.getElementById('paymentProcessing').style.display = 'block';
             
-            // Simulate payment API call latency (2 seconds)
-            setTimeout(() => {
-                document.getElementById('paymentProcessing').style.display = 'none';
-                // Show success
-                document.getElementById('paymentSuccess').style.display = 'block';
+            // Re-collect data in case it changed (or use global if needed, but we can just scrape form again)
+            const formData = {
+                payeeName: document.getElementById('payeeName').value,
+                payeeNumber: document.getElementById('payeeNumber').value,
+                email: document.getElementById('payeeEmail').value,
+                recipientName: document.getElementById('recipientName').value,
+                recipientNumber: document.getElementById('recipientNumber').value,
+                address: document.getElementById('deliveryAddress').value,
+                date: document.getElementById('deliveryDate').value,
+                time: document.getElementById('deliveryTime').value,
+                period: document.getElementById('timePeriod').value,
+                message: document.getElementById('orderMessage').value,
+                item: `${currentProduct.name} (${selectedSize.toUpperCase()})`,
+                amount: currentFinalPrice,
+                paymentMethod: document.querySelector('input[name="payment_method"]:checked').value
+            };
+            
+            try {
+                // Send order data to backend
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
                 
-                // Generate random order ID
-                const randomOrderId = Math.floor(100000 + Math.random() * 900000);
-                document.getElementById('successOrderId').textContent = randomOrderId;
-            }, 2000);
+                const result = await response.json();
+                
+                document.getElementById('paymentProcessing').style.display = 'none';
+                
+                if (result.success) {
+                    // Show success
+                    document.getElementById('paymentSuccess').style.display = 'block';
+                    document.getElementById('successOrderId').textContent = result.orderId.replace('ORD-', '');
+                } else {
+                    alert("There was an error processing your order. Please try again or contact support.");
+                    document.getElementById('checkoutForm').style.display = 'block';
+                    document.getElementById('checkoutOrderDetails').style.display = 'block';
+                    document.getElementById('payNowBtn').style.display = 'block';
+                }
+            } catch (error) {
+                console.error("Order submission failed:", error);
+                document.getElementById('paymentProcessing').style.display = 'none';
+                alert("Network error. Please try again.");
+                document.getElementById('checkoutForm').style.display = 'block';
+                document.getElementById('checkoutOrderDetails').style.display = 'block';
+                document.getElementById('payNowBtn').style.display = 'block';
+            }
         }
     </script>
 </body>

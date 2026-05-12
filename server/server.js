@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
+const nodemailer = require("nodemailer");
 
 const productRoutes = require("./routes/products");
 
@@ -48,6 +49,71 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+
+// Order processing endpoint
+app.post("/api/orders", async (req, res) => {
+    try {
+        const orderData = req.body;
+        
+        // Generate Order ID
+        const orderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
+        
+        // Setup Nodemailer transporter
+        // Assumes EMAIL_USER and EMAIL_PASS are set in Render env vars
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        // Construct HTML Email
+        const mailOptions = {
+            from: process.env.EMAIL_USER || "royalflowertvm@gmail.com",
+            to: "royalflowertvm@gmail.com",
+            subject: `New Order Received - ${orderId}`,
+            html: `
+                <h2>New Order Received: ${orderId}</h2>
+                <p><strong>Payment Method:</strong> ${orderData.paymentMethod === 'upi' ? 'UPI / GPay' : orderData.paymentMethod}</p>
+                <p><strong>Item:</strong> ${orderData.item}</p>
+                <p><strong>Amount:</strong> ₹${orderData.amount}</p>
+                <hr>
+                <h3>Recipient Details</h3>
+                <p><strong>Name:</strong> ${orderData.recipientName}</p>
+                <p><strong>Phone:</strong> ${orderData.recipientNumber}</p>
+                <p><strong>Address:</strong> ${orderData.address}</p>
+                <hr>
+                <h3>Delivery Schedule</h3>
+                <p><strong>Date:</strong> ${orderData.date}</p>
+                <p><strong>Time:</strong> ${orderData.time} ${orderData.period}</p>
+                <hr>
+                <h3>Payee Details</h3>
+                <p><strong>Name:</strong> ${orderData.payeeName}</p>
+                <p><strong>Phone:</strong> ${orderData.payeeNumber}</p>
+                <p><strong>Email:</strong> ${orderData.email || 'N/A'}</p>
+                <p><strong>Message:</strong> ${orderData.message || 'N/A'}</p>
+            `
+        };
+
+        // Send Email
+        if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+            await transporter.sendMail(mailOptions);
+            console.log("Order email sent successfully:", orderId);
+        } else {
+            console.log("Email credentials not set. Simulating order success:", orderId);
+            // Simulate processing delay if no email config is provided
+            await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        // Return success with order ID
+        res.status(200).json({ success: true, orderId: orderId });
+        
+    } catch (error) {
+        console.error("Error processing order:", error);
+        res.status(500).json({ success: false, message: "Failed to process order" });
+    }
+});
 
 // Admin login page
 app.get("/admin-login", (req, res) => {
