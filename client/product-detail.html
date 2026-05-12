@@ -552,13 +552,14 @@
             
             <!-- UPI Payment Section -->
             <div id="upiPaymentSection" style="display: none; text-align: center; padding: 20px;">
-                <h3 style="color: #d63384; margin-bottom: 15px;">Scan to Pay via UPI</h3>
-                <p style="margin-bottom: 10px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
-                <div style="background: white; padding: 15px; display: inline-block; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px;">
-                    <img id="upiQrCode" src="" alt="UPI QR Code" style="width: 200px; height: 200px;">
-                </div>
-                <p style="font-size: 1rem; color: #555; margin-bottom: 5px;">UPI ID: <strong>manujerald@okicici</strong></p>
-                <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Open GPay, PhonePe, or Paytm to scan</p>
+                <h3 style="color: #d63384; margin-bottom: 15px;">Complete Your Payment</h3>
+                <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
+                <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #d63384; margin-bottom: 20px;"></i>
+                <p style="font-size: 1rem; color: #555; margin-bottom: 5px;">Redirecting to your UPI App (GPay, PhonePe, etc)...</p>
+                <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">If it doesn't open automatically, click the button below.</p>
+                
+                <a id="upiAppBtn" href="#" class="btn btn-primary" style="display: inline-block; width: 100%; background: #28a745; color: white; padding: 15px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 15px;">Open UPI App</a>
+                
                 <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #d63384;">I have completed the payment</button>
                 <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer; text-decoration: underline;">Go Back</button>
             </div>
@@ -800,18 +801,21 @@ Product Link: ${window.location.origin}${currentProduct.image}`;
             const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
             
             if (selectedPaymentMethod === 'upi') {
-                // Show UPI QR Code
+                // Show UPI Redirect Section
                 document.getElementById('checkoutForm').style.display = 'none';
                 document.getElementById('checkoutOrderDetails').style.display = 'none';
                 
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
                 const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${currentFinalPrice}&cu=INR`;
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
                 
                 document.getElementById('upiAmountText').textContent = currentFinalPrice;
-                document.getElementById('upiQrCode').src = qrUrl;
+                document.getElementById('upiAppBtn').href = upiUrl;
                 document.getElementById('upiPaymentSection').style.display = 'block';
+                
+                // Automatically try to open the UPI app
+                window.location.href = upiUrl;
+                
                 return;
             }
             
