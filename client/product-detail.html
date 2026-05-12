@@ -749,7 +749,8 @@
 I'm interested in the ${selectedSize.toUpperCase()} size at ₹${currentFinalPrice}.
 Please let me know about availability and delivery options.
 
-Product Link: ${window.location.origin}${currentProduct.image}`;
+Product Link: ${window.location.origin}/product-detail.html?id=${currentProduct._id}
+Image: ${currentProduct.image}`;
                 
                 whatsappLink.href = `https://wa.me/919747577302?text=${encodeURIComponent(message)}`;
             }
