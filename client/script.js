@@ -192,11 +192,7 @@ function displayProducts(products) {
             <div class="product-info">
                 <h3>${product.name}</h3>
 
-                <div class="product-categories" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">
-                    ${(Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []))
-                        .map(cat => `<span style="background:#fff0f5;border:1px solid #f7aac9;color:#d63384;border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;">${cat}</span>`)
-                        .join('')}
-                </div>
+
 
                 ${product.description ? `<p class="product-description" style="font-size:13px;color:#666;margin:0 0 8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${product.description}</p>` : ''}
 

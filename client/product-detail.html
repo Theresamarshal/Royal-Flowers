@@ -384,6 +384,7 @@
                 </div>
                 <div class="product-detail-info">
                     <h1 id="productName">Loading...</h1>
+                    <div id="productCategories" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;"></div>
                     <div id="productCode" class="product-code-badge" style="display: none;"></div>
                     <div class="product-price" id="productPrice">₹0</div>
                     <div class="product-description" id="productDescription">Loading...</div>
@@ -690,6 +691,13 @@
             document.getElementById('productDescription').textContent = product.description || 'Beautiful arrangement perfect for any occasion.';
             document.getElementById('productImage').src = `${product.image}`;
             document.getElementById('productImage').alt = product.name;
+            
+            // Set Categories
+            const categoriesContainer = document.getElementById('productCategories');
+            const cats = Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []);
+            categoriesContainer.innerHTML = cats.map(cat => 
+                `<span style="background:#fff0f5;border:1px solid #f7aac9;color:#d63384;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;">${cat}</span>`
+            ).join('');
             
             // Set Product Code
             const codeEl = document.getElementById('productCode');
