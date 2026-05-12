@@ -555,11 +555,18 @@
             <div id="upiPaymentSection" style="display: none; text-align: center; padding: 20px;">
                 <h3 style="color: #d63384; margin-bottom: 15px;">Complete Your Payment</h3>
                 <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
-                <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #d63384; margin-bottom: 20px;"></i>
-                <p style="font-size: 1rem; color: #555; margin-bottom: 5px;">Redirecting to your UPI App (GPay, PhonePe, etc)...</p>
-                <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">If it doesn't open automatically, click the button below.</p>
                 
-                <a id="upiAppBtn" href="#" class="btn btn-primary" style="display: inline-block; width: 100%; background: #28a745; color: white; padding: 15px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 15px;">Open UPI App</a>
+                <p style="font-size: 0.95rem; color: #555; margin-bottom: 15px;">Please select your UPI App below:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+                    <a id="gpayBtn" href="#" class="btn btn-primary" style="display: block; width: 100%; background: #4285F4; color: white; padding: 12px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold;">Pay with Google Pay</a>
+                    
+                    <a id="phonepeBtn" href="#" class="btn btn-primary" style="display: block; width: 100%; background: #5f259f; color: white; padding: 12px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold;">Pay with PhonePe</a>
+                    
+                    <a id="paytmBtn" href="#" class="btn btn-primary" style="display: block; width: 100%; background: #00baf2; color: white; padding: 12px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold;">Pay with Paytm</a>
+                    
+                    <a id="genericUpiBtn" href="#" class="btn btn-primary" style="display: block; width: 100%; background: #28a745; color: white; padding: 12px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold;">Other UPI Apps (Android)</a>
+                </div>
                 
                 <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #d63384;">I have completed the payment</button>
                 <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer; text-decoration: underline;">Go Back</button>
@@ -816,15 +823,27 @@ Image: ${currentProduct.image}`;
                 
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
-                // Standard UPI deep link format (safest across all devices)
-                const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${currentFinalPrice}&cu=INR`;
+                const amount = currentFinalPrice;
                 
-                document.getElementById('upiAmountText').textContent = currentFinalPrice;
-                document.getElementById('upiAppBtn').href = upiUrl;
+                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                const phonepeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                const paytmUrl = `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                const genericUpiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                
+                document.getElementById('upiAmountText').textContent = amount;
+                
+                document.getElementById('gpayBtn').href = gpayUrl;
+                document.getElementById('phonepeBtn').href = phonepeUrl;
+                document.getElementById('paytmBtn').href = paytmUrl;
+                document.getElementById('genericUpiBtn').href = genericUpiUrl;
+                
                 document.getElementById('upiPaymentSection').style.display = 'block';
                 
-                // Automatically try to open the UPI app chooser
-                window.location.href = upiUrl;
+                // For iOS, don't auto-redirect as it causes errors. Let them click the button.
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (!isIOS) {
+                    window.location.href = genericUpiUrl;
+                }
                 
                 return;
             }
