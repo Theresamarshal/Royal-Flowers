@@ -5133,7 +5133,9 @@ gap:30px;
 
     .hero-buttons .btn {
         width: 100%;
+        display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     /* Recently Viewed Mobile */
