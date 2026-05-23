@@ -817,15 +817,15 @@ Image: ${currentProduct.image}`;
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
                 const amount = currentFinalPrice;
-                // Force GPay specifically on both iOS and Android to bypass WhatsApp hijacking
-                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                // Use standard universal UPI link to support full limits and all UPI apps (GPay, PhonePe, Paytm, etc.)
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
                 
                 document.getElementById('upiAmountText').textContent = amount;
-                document.getElementById('upiAppBtn').href = gpayUrl;
+                document.getElementById('upiAppBtn').href = upiUrl;
                 document.getElementById('upiPaymentSection').style.display = 'block';
                 
                 // Automatically redirect on all devices
-                window.location.href = gpayUrl;
+                window.location.href = upiUrl;
                 
                 return;
             }
