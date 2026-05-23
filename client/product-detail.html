@@ -561,7 +561,17 @@
                 
                 <a id="upiAppBtn" href="#" class="btn btn-primary" style="display: inline-block; width: 100%; background: #28a745; color: white; padding: 15px; box-sizing: border-box; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 15px;">Open UPI App</a>
                 
-                <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #d63384;">I have completed the payment</button>
+                <!-- Manual Payment Option -->
+                <div style="background: #f8f9fa; border: 1px dashed #d63384; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: center;">
+                    <p style="font-size: 0.9rem; color: #333; margin: 0 0 10px 0;"><strong>Or Pay Manually:</strong> Copy the UPI ID below, open any UPI app (GPay/PhonePe), and pay the amount.</p>
+                    <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+                        <code id="upiIdCode" style="font-size: 1.1rem; color: #d63384; font-weight: bold; background: #fff5f8; padding: 5px 10px; border-radius: 4px; border: 1px solid #fce4ec;">manujerald@okicici</code>
+                        <button type="button" onclick="copyUpiId()" style="background: #d63384; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: background 0.2s;">Copy</button>
+                    </div>
+                    <div id="copyFeedback" style="display: none; font-size: 0.85rem; color: #28a745; margin-top: 8px; font-weight: 600;"><i class="fas fa-check"></i> UPI ID Copied!</div>
+                </div>
+
+                <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #28a745;">I have completed the payment</button>
                 <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer; text-decoration: underline;">Go Back</button>
             </div>
             
@@ -831,6 +841,31 @@ Image: ${currentProduct.image}`;
             }
             
             completePaymentSimulation();
+        }
+
+        function copyUpiId() {
+            const upiId = "manujerald@okicici";
+            navigator.clipboard.writeText(upiId).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy UPI ID: ", err);
+                // Fallback copy using older method if clipboard API fails
+                const tempInput = document.createElement("input");
+                tempInput.value = upiId;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                const feedback = document.getElementById('copyFeedback');
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 2000);
+            });
         }
 
         function confirmUpiPayment() {
