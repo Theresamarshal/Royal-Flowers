@@ -563,6 +563,7 @@
                     <a id="gpayBtn" href="#" class="btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #4285F4; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                         <i class="fab fa-google-pay" style="font-size: 1.5rem;"></i> Pay via Google Pay
                     </a>
+                    <span id="gpayInstruction" style="font-size: 0.85rem; color: #d63384; font-weight: 600; margin-top: 5px; display: block;">*(Note: Please enter the amount ₹<span id="gpayInstructionAmount"></span> manually in Google Pay to pay via your standard bank account)*</span>
                 </div>
 
                 <!-- Dynamic UPI QR Code -->
@@ -841,13 +842,13 @@ Image: ${currentProduct.image}`;
                 const payeeName = "Royal Flowers";
                 const amount = currentFinalPrice;
                 const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
-                // Use GPay scheme to bypass iOS WhatsApp hijacking, and include MCC 5193 (Florist) + unique transaction ref (tr)
-                // so Google Pay treats it as a Peer-to-Merchant (P2M) payment instead of P2P. This prevents GPay from forcing UPI Lite
-                // and allows using regular bank accounts for amounts over ₹2,000.
-                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&mc=5193&tr=${transactionRef}`;
+                // Omit the amount 'am' parameter from GPay deep-link to bypass Google Pay's UPI Lite intent lock on iOS.
+                // This forces GPay to let the user input the amount manually inside GPay, which enables their standard bank account.
+                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
                 const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&mc=5193&tr=${transactionRef}`;
                 
                 document.getElementById('upiAmountText').textContent = amount;
+                document.getElementById('gpayInstructionAmount').textContent = amount;
                 document.getElementById('gpayBtn').href = gpayUrl;
                 
                 // Generate and display UPI QR Code
