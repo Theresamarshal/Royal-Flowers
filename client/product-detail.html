@@ -556,22 +556,12 @@
                 <h3 style="color: #d63384; margin-bottom: 15px;">Complete Your Payment</h3>
                 <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
                 
-                <p style="font-size: 0.95rem; color: #555; margin-bottom: 15px; font-weight: 500;">Select your UPI app to pay:</p>
+                <p style="font-size: 0.95rem; color: #555; margin-bottom: 15px; font-weight: 500;">Pay securely using Google Pay:</p>
                 
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
                     <!-- Google Pay Button -->
                     <a id="gpayBtn" href="#" class="btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #4285F4; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                         <i class="fab fa-google-pay" style="font-size: 1.5rem;"></i> Pay via Google Pay
-                    </a>
-                    
-                    <!-- PhonePe Button -->
-                    <a id="phonepeBtn" href="#" class="btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #5f259f; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="fas fa-mobile-alt"></i> Pay via PhonePe
-                    </a>
-                    
-                    <!-- Paytm Button -->
-                    <a id="paytmBtn" href="#" class="btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #00baf2; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="fas fa-wallet"></i> Pay via Paytm
                     </a>
                 </div>
                 
@@ -841,15 +831,14 @@ Image: ${currentProduct.image}`;
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
                 const amount = currentFinalPrice;
-                // Create deep links for specific apps to prevent iOS WhatsApp hijacking of generic upi:// URLs
-                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
-                const phonepeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
-                const paytmUrl = `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+                const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
+                // Use GPay scheme to bypass iOS WhatsApp hijacking, and include MCC 5193 (Florist) + unique transaction ref (tr)
+                // so Google Pay treats it as a Peer-to-Merchant (P2M) payment instead of P2P. This prevents GPay from forcing UPI Lite
+                // and allows using regular bank accounts for amounts over ₹2,000.
+                const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&mc=5193&tr=${transactionRef}`;
                 
                 document.getElementById('upiAmountText').textContent = amount;
                 document.getElementById('gpayBtn').href = gpayUrl;
-                document.getElementById('phonepeBtn').href = phonepeUrl;
-                document.getElementById('paytmBtn').href = paytmUrl;
                 
                 document.getElementById('upiPaymentSection').style.display = 'block';
                 
