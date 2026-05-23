@@ -3,6 +3,7 @@ console.log("Script loaded successfully!");
 let currentProducts = [];
 let originalProducts = [];
 let isSearching = false; // Track if user is searching
+let currentCategory = 'all'; // Track currently selected category
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM loaded");
@@ -18,6 +19,7 @@ function initializeApp() {
     
     if (categoryParam) {
         console.log("URL Category detected:", categoryParam);
+        currentCategory = categoryParam;
         loadProducts(categoryParam);
     } else {
         loadProducts(); // displayRecentlyViewed is called inside after products load
@@ -54,8 +56,10 @@ async function loadProducts(targetCategory = null) {
         currentProducts = products;
         originalProducts = [...products]; // Store original products
 
-        if (targetCategory && targetCategory !== 'all') {
-            filterByCategory(targetCategory, false); // false = don't update URL again
+        const activeCategory = targetCategory !== null ? targetCategory : currentCategory;
+
+        if (activeCategory && activeCategory !== 'all') {
+            filterByCategory(activeCategory, false); // false = don't update URL again
         } else {
             displayProducts(products);
         }
@@ -86,8 +90,8 @@ function setupCategoryListeners() {
     const sidebarLinks = document.querySelectorAll('.category-link');
     sidebarLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // If on shop.html, prevent reload and filter dynamically
-            if (window.location.pathname.includes('shop.html') || window.location.pathname === '/' || window.location.pathname === '') {
+            // If we have a productGrid on the current page, filter dynamically without reloading
+            if (document.getElementById('productGrid')) {
                 e.preventDefault();
                 const category = this.getAttribute('data-category');
                 filterByCategory(category);
@@ -97,20 +101,24 @@ function setupCategoryListeners() {
 }
 
 function filterByCategory(categoryName, updateURL = true) {
+    currentCategory = categoryName || 'all';
     isSearching = false; // Reset search state when filtering by category
     
     console.log("Filtering by category:", categoryName);
 
+    const currentPage = window.location.pathname.includes('shop.html') ? 'shop.html' : 
+                        (window.location.pathname.includes('index.html') ? 'index.html' : '');
+
     if (!categoryName || categoryName === 'all') {
         currentProducts = [...originalProducts];
-        if (updateURL) window.history.pushState({}, '', 'shop.html');
+        if (updateURL) window.history.pushState({}, '', currentPage || '/');
     } else {
         currentProducts = originalProducts.filter(product => {
             const cats = Array.isArray(product.category) ? product.category : (product.category ? [product.category] : []);
             // Case-insensitive match
             return cats.some(c => c.toLowerCase() === categoryName.toLowerCase());
         });
-        if (updateURL) window.history.pushState({}, '', `shop.html?category=${encodeURIComponent(categoryName)}`);
+        if (updateURL) window.history.pushState({}, '', `${currentPage || '/'}?category=${encodeURIComponent(categoryName)}`);
     }
 
     // Update active UI state in sidebar

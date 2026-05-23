@@ -153,6 +153,60 @@
         </div>
     </section>
 
+    <!-- Shop Section -->
+    <section id="shop" class="shop-section">
+        <div class="container">
+            <div class="shop-header">
+                <h1>Our Flower Collection</h1>
+                <p>Browse our beautiful categories and premium handcrafted bouquets.</p>
+            </div>
+            
+            <div class="shop-content">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="widget">
+                        <h3>Shop by Categories</h3>
+                        <ul class="categories">
+                            <li><a href="shop.html" class="category-link" data-category="all">All Products</a></li>
+                            <li><a href="shop.html?category=Anniversary+Flowers" class="category-link" data-category="Anniversary Flowers">Anniversary Flowers</a></li>
+                            <li><a href="shop.html?category=Birthday+Flowers" class="category-link" data-category="Birthday Flowers">Birthday Flowers</a></li>
+                            <li><a href="shop.html?category=Bouquet" class="category-link" data-category="Bouquet">Bouquet</a></li>
+                            <li><a href="shop.html?category=Bridal+Bouquet" class="category-link" data-category="Bridal Bouquet">Bridal Bouquet</a></li>
+                            <li><a href="shop.html?category=Cake" class="category-link" data-category="Cake">Cake</a></li>
+                            <li><a href="shop.html?category=Congratulations" class="category-link" data-category="Congratulations">Congratulations</a></li>
+                            <li><a href="shop.html?category=Funeral%2FSympathy" class="category-link" data-category="Funeral/Sympathy">Funeral/Sympathy</a></li>
+                            <li><a href="shop.html?category=Valentine's+Day+flowers" class="category-link" data-category="Valentine's Day flowers">Valentine's Day flowers</a></li>
+                            <li><a href="shop.html?category=Wedding" class="category-link" data-category="Wedding">Wedding</a></li>
+                            <li><a href="shop.html?category=Welcome+Flower" class="category-link" data-category="Welcome Flower">Welcome Flower</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Main Products -->
+                <div class="main-content">
+                    <div class="products-header">
+                        <span class="results-count">
+                            Showing <span id="productCount">0</span> products
+                        </span>
+
+                        <div class="sort-dropdown">
+                            <select id="sortSelect" onchange="sortProducts()">
+                                <option value="default">Sort by</option>
+                                <option value="price-low">Price Low to High</option>
+                                <option value="price-high">Price High to Low</option>
+                                <option value="name-asc">Name A-Z</option>
+                                <option value="name-desc">Name Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div id="productGrid" class="product-grid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- User Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
