@@ -5069,7 +5069,9 @@ gap:30px;
     }
 
     .product-description {
-        display: none !important; /* Hide description on mobile for grid density */
+        display: -webkit-box !important; /* Show clamped description on mobile */
+        font-size: 12px;
+        margin-bottom: 6px;
     }
 
     .price {
@@ -5078,7 +5080,24 @@ gap:30px;
     }
 
     .size-options {
-        display: none; /* Simplify card on mobile */
+        display: block;
+        margin: 10px 0;
+    }
+
+    .size-options label {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .size-buttons {
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .size-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
     }
 
     .shop-now-btn {
