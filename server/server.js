@@ -61,10 +61,15 @@ app.post("/api/orders", async (req, res) => {
         // Setup Nodemailer transporter
         // Assumes EMAIL_USER and EMAIL_PASS are set in Render env vars
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
 
@@ -126,10 +131,15 @@ app.post("/api/contact", async (req, res) => {
 
         // Setup Nodemailer transporter
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
 
