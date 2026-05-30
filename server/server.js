@@ -70,7 +70,10 @@ app.post("/api/orders", async (req, res) => {
             },
             tls: {
                 rejectUnauthorized: false
-            }
+            },
+            connectionTimeout: 5000,
+            greetingTimeout: 5000,
+            socketTimeout: 5000
         });
 
         // Construct HTML Email
@@ -140,7 +143,10 @@ app.post("/api/contact", async (req, res) => {
             },
             tls: {
                 rejectUnauthorized: false
-            }
+            },
+            connectionTimeout: 5000,
+            greetingTimeout: 5000,
+            socketTimeout: 5000
         });
 
         // Construct HTML Email
