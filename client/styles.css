@@ -4631,12 +4631,10 @@ gap:30px;
     line-height: 1.2;
 }
 
+.category-header h1 {
     font-size: 3rem;
-
     margin-bottom: 20px;
-
     font-family: 'Playfair Display', serif;
-
 }
 
 
