@@ -226,5 +226,150 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            
+            // Robot verification check
+            const isRobotChecked = document.getElementById('robot').checked;
+            if (!isRobotChecked) {
+                showToast("Please verify that you are not a robot.", "warning");
+                return;
+            }
+            
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                // Disable button and show sending state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    showToast(result.message || "Message sent successfully!", "success");
+                    this.reset(); // clear form
+                } else {
+                    showToast(result.message || "Failed to send message.", "error");
+                }
+            } catch (error) {
+                console.error("Error submitting contact form:", error);
+                showToast("An error occurred. Please try again later.", "error");
+            } finally {
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
+        });
+
+        // Dynamic, beautiful premium toast function
+        function showToast(message, type = 'success') {
+            // Check if styles already injected, if not inject them
+            if (!document.getElementById('toast-styles')) {
+                const style = document.createElement('style');
+                style.id = 'toast-styles';
+                style.textContent = `
+                    .toast-container {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        z-index: 9999;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        font-family: 'Inter', sans-serif;
+                    }
+                    .toast-alert {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 15px 24px;
+                        border-radius: 8px;
+                        background: #ffffff;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                        color: #333;
+                        min-width: 300px;
+                        max-width: 450px;
+                        transform: translateX(120%);
+                        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
+                        opacity: 0;
+                        border-left: 4px solid #4caf50;
+                    }
+                    .toast-alert.show {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    .toast-alert.success { border-left-color: #4caf50; }
+                    .toast-alert.error { border-left-color: #f44336; }
+                    .toast-alert.warning { border-left-color: #ff9800; }
+                    .toast-icon {
+                        font-size: 1.25rem;
+                    }
+                    .toast-alert.success .toast-icon { color: #4caf50; }
+                    .toast-alert.error .toast-icon { color: #f44336; }
+                    .toast-alert.warning .toast-icon { color: #ff9800; }
+                    .toast-message {
+                        font-size: 0.95rem;
+                        font-weight: 500;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Create container if not exists
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast-alert ${type}`;
+            
+            let iconClass = 'fa-check-circle';
+            if (type === 'error') iconClass = 'fa-times-circle';
+            if (type === 'warning') iconClass = 'fa-exclamation-triangle';
+
+            toast.innerHTML = `
+                <i class="fas ${iconClass} toast-icon"></i>
+                <div class="toast-message">${message}</div>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+
+            // Auto dismiss
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 400);
+            }, 4000);
+        }
+    </script>
 </body>
 </html>

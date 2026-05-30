@@ -115,6 +115,58 @@ app.post("/api/orders", async (req, res) => {
     }
 });
 
+// Contact Form Submission Endpoint
+app.post("/api/contact", async (req, res) => {
+    try {
+        const { name, email, phone, subject, message } = req.body;
+        
+        if (!name || !email || !phone || !message) {
+            return res.status(400).json({ success: false, message: "Please fill in all required fields." });
+        }
+
+        // Setup Nodemailer transporter
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        // Construct HTML Email
+        const mailOptions = {
+            from: process.env.EMAIL_USER || "royalflowertvm@gmail.com",
+            to: "theresamarshal04@gmail.com",
+            subject: `New Contact Form Message: ${subject || "No Subject"}`,
+            html: `
+                <h2>New Contact Form Inquiry</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+                <p><strong>Message:</strong></p>
+                <blockquote style="background: #f9f9f9; padding: 15px; border-left: 5px solid #ccc; font-style: italic;">
+                    ${message.replace(/\n/g, '<br>')}
+                </blockquote>
+            `
+        };
+
+        // Send Email
+        if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+            await transporter.sendMail(mailOptions);
+            console.log("Contact form email sent successfully to theresamarshal04@gmail.com");
+            res.status(200).json({ success: true, message: "Your message has been sent successfully!" });
+        } else {
+            console.log("Email credentials not set. Simulated contact submission for:", { name, email, phone, subject, message });
+            res.status(200).json({ success: true, message: "Message received successfully (Simulation mode)." });
+        }
+        
+    } catch (error) {
+        console.error("Error sending contact message:", error);
+        res.status(500).json({ success: false, message: "Failed to send message. Please try again later." });
+    }
+});
+
 // Admin login page
 app.get("/admin-login", (req, res) => {
     if (req.session && req.session.isAdmin) {
