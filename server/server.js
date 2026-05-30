@@ -136,7 +136,7 @@ app.post("/api/contact", async (req, res) => {
         // Construct HTML Email
         const mailOptions = {
             from: process.env.EMAIL_USER || "royalflowertvm@gmail.com",
-            to: "theresamarshal04@gmail.com",
+            to: "royalflowertvm@gmail.com",
             subject: `New Contact Form Message: ${subject || "No Subject"}`,
             html: `
                 <h2>New Contact Form Inquiry</h2>
@@ -154,7 +154,7 @@ app.post("/api/contact", async (req, res) => {
         // Send Email
         if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
             await transporter.sendMail(mailOptions);
-            console.log("Contact form email sent successfully to theresamarshal04@gmail.com");
+            console.log("Contact form email sent successfully to royalflowertvm@gmail.com");
             res.status(200).json({ success: true, message: "Your message has been sent successfully!" });
         } else {
             console.log("Email credentials not set. Simulated contact submission for:", { name, email, phone, subject, message });
