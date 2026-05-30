@@ -227,16 +227,29 @@
 
     <script src="script.js"></script>
     <script>
+        console.log("Contact form script loaded.");
+        
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log("Submit event intercepted.");
             
-            const submitBtn = this.querySelector('.submit-btn');
+            const form = document.getElementById('contactForm');
+            const submitBtn = form.querySelector('.submit-btn');
             const originalBtnText = submitBtn.textContent;
             
             // Robot verification check
-            const isRobotChecked = document.getElementById('robot').checked;
+            const robotCheckbox = document.getElementById('robot');
+            const isRobotChecked = robotCheckbox ? robotCheckbox.checked : false;
+            console.log("Robot checkbox status:", isRobotChecked);
+            
             if (!isRobotChecked) {
-                showToast("Please verify that you are not a robot.", "warning");
+                console.warn("Robot verification failed.");
+                try {
+                    showToast("Please verify that you are not a robot.", "warning");
+                } catch (tErr) {
+                    console.error("showToast error:", tErr);
+                    alert("Please verify that you are not a robot.");
+                }
                 return;
             }
             
@@ -248,12 +261,14 @@
                 subject: document.getElementById('subject').value,
                 message: document.getElementById('message').value
             };
+            console.log("Sending form data:", formData);
             
             try {
                 // Disable button and show sending state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 
+                console.log("Making fetch request to /api/contact...");
                 const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: {
@@ -262,28 +277,50 @@
                     body: JSON.stringify(formData)
                 });
                 
+                console.log("Fetch response status:", response.status);
                 const result = await response.json();
+                console.log("Parsed response payload:", result);
                 
                 if (response.ok && result.success) {
-                    showToast(result.message || "Message sent successfully!", "success");
-                    this.reset(); // clear form
+                    try {
+                        showToast(result.message || "Message sent successfully!", "success");
+                    } catch (tErr) {
+                        console.error("showToast success error:", tErr);
+                        alert(result.message || "Message sent successfully!");
+                    }
+                    form.reset(); // clear form
+                    console.log("Form reset successfully.");
                 } else {
-                    showToast(result.message || "Failed to send message.", "error");
+                    try {
+                        showToast(result.message || "Failed to send message.", "error");
+                    } catch (tErr) {
+                        console.error("showToast failure error:", tErr);
+                        alert(result.message || "Failed to send message.");
+                    }
                 }
             } catch (error) {
                 console.error("Error submitting contact form:", error);
-                showToast("An error occurred. Please try again later.", "error");
+                try {
+                    showToast("An error occurred. Please try again later.", "error");
+                } catch (tErr) {
+                    console.error("showToast catch error:", tErr);
+                    alert("An error occurred. Please try again later.");
+                }
             } finally {
                 // Restore button
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalBtnText;
+                console.log("Button state restored.");
             }
         });
 
         // Dynamic, beautiful premium toast function
         function showToast(message, type = 'success') {
+            console.log(`showToast called: "${message}" (${type})`);
+            
             // Check if styles already injected, if not inject them
             if (!document.getElementById('toast-styles')) {
+                console.log("Injecting toast styles...");
                 const style = document.createElement('style');
                 style.id = 'toast-styles';
                 style.textContent = `
