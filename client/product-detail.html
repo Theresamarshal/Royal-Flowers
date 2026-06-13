@@ -833,31 +833,30 @@ Image: ${currentProduct.image}`;
                 const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
                 // Pre-fill amount and add mode=02 (secure merchant mode) along with florist MCC (5193) and unique transaction ref (tr)
                 // to force Google Pay to bypass UPI Lite selection and use the standard bank account for ₹2,000+ orders.
-                const upiId = "manujerald@okicici";
-                const payeeNameEncoded = encodeURIComponent("Royal Flowers");
-                const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
-                
-                // Standard UPI URL — works in all UPI apps including GPay
-                const upiUrl = `upi://pay?pa=${upiId}&pn=${payeeNameEncoded}&am=${amount.toFixed(2)}&cu=INR&tr=${transactionRef}`;
-                
-                // GPay intent URL — more reliable than gpay:// scheme, works for all amounts
-                const gpayIntentUrl = `intent://upi/pay?pa=${upiId}&pn=${payeeNameEncoded}&am=${amount.toFixed(2)}&cu=INR&tr=${transactionRef}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
-                
-                document.getElementById('upiAmountText').textContent = amount;
-                document.getElementById('gpayInstructionAmount').textContent = amount;
-                
-                // Use intent:// scheme — bypasses the ₹1000 deep link cap
-                document.getElementById('gpayBtn').href = gpayIntentUrl;
-                
-                // Remove the "(Note: Please enter amount manually)" instruction since intent:// pre-fills it
-                document.getElementById('gpayInstruction').style.display = 'none';
-                
-                // Generate QR with standard upi:// URL — scannable by any UPI app
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
-                document.getElementById('upiQrImg').src = qrUrl;
-                document.getElementById('qrCodeContainer').style.display = 'block';
-                document.getElementById('upiPaymentSection').style.display = 'block';
-                                
+            const upiId = "manujerald@okicici";
+const payeeNameEncoded = encodeURIComponent("Royal Flowers");
+const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
+
+// Standard UPI URL — works in all UPI apps including GPay
+const upiUrl = `upi://pay?pa=${upiId}&pn=${payeeNameEncoded}&am=${amount.toFixed(2)}&cu=INR&tr=${transactionRef}`;
+
+// GPay intent URL — more reliable than gpay:// scheme, works for all amounts
+const gpayIntentUrl = `intent://upi/pay?pa=${upiId}&pn=${payeeNameEncoded}&am=${amount.toFixed(2)}&cu=INR&tr=${transactionRef}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+
+document.getElementById('upiAmountText').textContent = amount;
+document.getElementById('gpayInstructionAmount').textContent = amount;
+
+// Use intent:// scheme — bypasses the ₹1000 deep link cap
+document.getElementById('gpayBtn').href = gpayIntentUrl;
+
+// Remove the "(Note: Please enter amount manually)" instruction since intent:// pre-fills it
+document.getElementById('gpayInstruction').style.display = 'none';
+
+// Generate QR with standard upi:// URL — scannable by any UPI app
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
+document.getElementById('upiQrImg').src = qrUrl;
+document.getElementById('qrCodeContainer').style.display = 'block';
+document.getElementById('upiPaymentSection').style.display = 'block';
                 return;
             }
             
