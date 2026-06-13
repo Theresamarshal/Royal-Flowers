@@ -837,28 +837,26 @@ Image: ${currentProduct.image}`;
             const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
             
             if (selectedPaymentMethod === 'upi') {
-                // Show UPI Redirect Section
                 document.getElementById('checkoutForm').style.display = 'none';
                 document.getElementById('checkoutOrderDetails').style.display = 'none';
-                
+            
                 const upiId = "manujerald@okicici";
                 const payeeName = "Royal Flowers";
                 const amount = currentFinalPrice;
-                const transactionRef = 'RF' + Date.now() + Math.floor(Math.random() * 1000);
-                // Pre-fill amount and add mode=02 (secure merchant mode) along with florist MCC (5193) and unique transaction ref (tr)
-                // to force Google Pay to bypass UPI Lite selection and use the standard bank account for ₹2,000+ orders.
-          const gpayUrl = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&mc=5193&tr=${transactionRef}&mode=02`;
-const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&mc=5193&tr=${transactionRef}`;
-
-document.getElementById('upiAmountText').textContent = amount;
-document.getElementById('gpayInstructionAmount').textContent = amount;
-document.getElementById('gpayBtn').href = gpayUrl;
-
-// Generate and display UPI QR Code
-const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
-document.getElementById('upiQrImg').src = qrUrl;
-document.getElementById('qrCodeContainer').style.display = 'block';
-document.getElementById('upiPaymentSection').style.display = 'block';
+            
+                // Standard UPI URL — only used for QR code generation, not for deep linking
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR`;
+            
+                // Set all amount display spans
+                document.getElementById('upiAmountText').textContent = amount;
+                document.getElementById('gpayInstructionAmount').textContent = amount;
+                document.getElementById('upiAmountConfirm').textContent = amount;
+            
+                // Generate QR — works with GPay, PhonePe, Paytm, any UPI app, any amount
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
+                document.getElementById('upiQrImg').src = qrUrl;
+            
+                document.getElementById('upiPaymentSection').style.display = 'block';
                 return;
             }
             
