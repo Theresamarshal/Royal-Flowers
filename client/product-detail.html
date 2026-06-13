@@ -541,42 +541,56 @@
             </form>
             
             <!-- UPI Payment Section -->
-            <div id="upiPaymentSection" style="display: none; text-align: center; padding: 20px;">
-                <h3 style="color: #d63384; margin-bottom: 15px;">Complete Your Payment</h3>
-                <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem;">Amount: ₹<span id="upiAmountText"></span></p>
-                
-                <p style="font-size: 0.95rem; color: #555; margin-bottom: 15px; font-weight: 500;">Pay securely using Google Pay:</p>
-                
-                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
-                    <!-- Google Pay Button -->
-                    <a id="gpayBtn" href="#" class="btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #4285F4; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="fab fa-google-pay" style="font-size: 1.5rem;"></i> Pay via Google Pay
-                    </a>
-                    <span id="gpayInstruction" style="font-size: 0.85rem; color: #d63384; font-weight: 600; margin-top: 5px; display: block;">*(Note: Please enter the amount ₹<span id="gpayInstructionAmount"></span> manually in Google Pay to pay via your standard bank account)*</span>
-                </div>
+<div id="upiPaymentSection" style="display: none; text-align: center; padding: 20px;">
+    <h3 style="color: #d63384; margin-bottom: 5px;">Complete Your UPI Payment</h3>
+    <p style="font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 20px;">
+        Amount: ₹<span id="upiAmountText"></span>
+    </p>
 
-                <!-- Dynamic UPI QR Code -->
-                <div id="qrCodeContainer" style="margin: 20px auto; text-align: center; max-width: 220px; display: none;">
-                    <p style="font-size: 0.9rem; color: #333; margin-bottom: 10px; font-weight: bold;">Scan or Screenshot to Pay:</p>
-                    <div style="background: white; border: 1px solid #ddd; padding: 12px; border-radius: 10px; display: inline-block; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <img id="upiQrImg" src="" alt="UPI QR Code" style="width: 160px; height: 160px; display: block; margin: 0 auto;">
-                    </div>
-                    <p style="font-size: 0.75rem; color: #777; margin-top: 8px; line-height: 1.3;">Scan with GPay, or screenshot this QR and upload it inside Google Pay's "Scan QR" screen.</p>
-                </div>
-                
-                <!-- Manual Payment Option -->
-                <div style="background: #f8f9fa; border: 1px dashed #d63384; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: center;">
-                    <p style="font-size: 0.9rem; color: #333; margin: 0 0 10px 0;"><strong>Or Pay Manually:</strong> Copy the UPI ID below, open any UPI app (GPay/PhonePe), and pay the amount.</p>
-                    <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
-                        <code id="upiIdCode" style="font-size: 1.1rem; color: #d63384; font-weight: bold; background: #fff5f8; padding: 5px 10px; border-radius: 4px; border: 1px solid #fce4ec;">manujerald@okicici</code>
-                        <button type="button" onclick="copyUpiId()" style="background: #d63384; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: background 0.2s;">Copy</button>
-                    </div>
-                    <div id="copyFeedback" style="display: none; font-size: 0.85rem; color: #28a745; margin-top: 8px; font-weight: 600;"><i class="fas fa-check"></i> UPI ID Copied!</div>
-                </div>
+    <!-- QR Code -->
+    <div style="margin: 0 auto 20px; max-width: 220px;">
+        <p style="font-size: 0.9rem; color: #333; margin-bottom: 10px; font-weight: bold;">
+            Scan with any UPI app (GPay, PhonePe, Paytm, etc.)
+        </p>
+        <div style="background: white; border: 1px solid #ddd; padding: 14px; border-radius: 12px; display: inline-block;">
+            <img id="upiQrImg" src="" alt="UPI QR Code" style="width: 170px; height: 170px; display: block;">
+        </div>
+        <p style="font-size: 0.78rem; color: #888; margin-top: 8px; line-height: 1.4;">
+            Open any UPI app → Scan QR → confirm the amount → pay
+        </p>
+    </div>
 
-                <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #28a745;">I have completed the payment</button>
-                <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer; text-decoration: underline;">Go Back</button>
-            </div>
+    <!-- Manual UPI ID -->
+    <div style="background: #f8f9fa; border: 1px dashed #d63384; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+        <p style="font-size: 0.9rem; color: #333; margin: 0 0 10px; font-weight: 600;">
+            Or pay manually — copy the UPI ID below:
+        </p>
+        <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <code id="upiIdCode" style="font-size: 1.05rem; color: #d63384; font-weight: bold; background: #fff5f8; padding: 6px 12px; border-radius: 4px; border: 1px solid #fce4ec;">manujerald@okicici</code>
+            <button type="button" onclick="copyUpiId()" style="background: #d63384; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; font-weight: bold;">Copy</button>
+        </div>
+        <div id="copyFeedback" style="display: none; font-size: 0.85rem; color: #28a745; margin-top: 8px; font-weight: 600;">
+            ✓ UPI ID copied!
+        </div>
+        <p style="font-size: 0.82rem; color: #888; margin: 10px 0 0;">
+            Open GPay / PhonePe → Pay by UPI ID → paste → enter ₹<span id="gpayInstructionAmount"></span> manually → pay
+        </p>
+    </div>
+
+    <!-- Amount warning -->
+    <div style="background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 12px; margin-bottom: 20px; font-size: 0.85rem; color: #6d4c00; text-align: left;">
+        <strong>⚠ Important:</strong> After scanning or entering the UPI ID, verify the amount shows
+        <strong>₹<span id="upiAmountConfirm"></span></strong> before confirming.
+    </div>
+
+    <button onclick="confirmUpiPayment()" class="pay-now-btn" style="background: #28a745; margin-bottom: 10px;">
+        ✓ I have completed the payment
+    </button>
+    <br>
+    <button onclick="cancelUpiPayment()" style="background: transparent; border: none; color: #666; margin-top: 10px; cursor: pointer; text-decoration: underline; font-size: 0.9rem;">
+        ← Go back and change payment method
+    </button>
+</div>
             
             <div id="paymentSuccess" style="display: none; text-align: center; padding: 20px;">
                 <i class="fas fa-check-circle" style="color: #28a745; font-size: 4rem; margin-bottom: 15px;"></i>
